@@ -20,7 +20,6 @@ import { EmployesTableComponent } from './employes-table/employes-table.componen
   declarations: [
     ...routedComponents,
     FsIconComponent,
-    EmployesTableComponent,
   ],
 })
 export class TablesModule { }

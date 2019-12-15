@@ -78,6 +78,7 @@ export class EmployesTableComponent implements OnInit {
   }
 
   onCreateConfirm(event): void {
+    console.log("event"+event.newData.name)
    const employee: Employee = <Employee>{};
    employee.name = event.newData.name;
    employee.gross_salary_month = event.newData.gross_salary_month;

@@ -117,7 +117,8 @@ export class EmployeeInformationsComponent implements OnInit {
       response => {
       this.employee.editMode = false;
       this.employeeForm.disable();
-        response.status == 'success' ? this.router.navigate(['/pages/employee'])
+      console.log('id : '+this.employee.id)
+        response.status == 'success' ? this.router.navigate(['/pages/employee/'+this.employee.id])
           : this.formError = "error";
       });
   }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ITimeSheet } from '../interfaces/itime-sheet';
 import { map } from 'rxjs/operators';
-import ThymeConstants from './thyme-constants';
+import { ThymeConstants } from './thyme-constants';
 
 @Injectable({
   providedIn: 'root'
