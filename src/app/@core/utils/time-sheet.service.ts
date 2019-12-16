@@ -14,6 +14,10 @@ export class TimeSheetService {
   stampInUrl: string = ThymeConstants.HOST + '/timesheets/timestamp/stamp_in?password=';
   stampOutUrl: string = ThymeConstants.HOST + '/timesheets/timestamp/stamp_out?password=';
   saveTimeStampUrl: string = ThymeConstants.HOST + '/timesheets/timestamp/insert';
+  saveHolidayUrl: string = ThymeConstants.HOST + '/timesheets/holiday/insert';
+  saveSickNoteUrl: string = ThymeConstants.HOST + '/timesheets/sicknote/insert';
+
+  
   constructor(private http: HttpClient) { }
 
 
@@ -32,8 +36,18 @@ export class TimeSheetService {
       .pipe(map(res => res));
   }
 
-  public saveTimeStamp(password: string, from: string, to: string, note: string): Observable<any> {
-    let fullSaveUrl = this.saveTimeStampUrl+"?password="+password+"&from_time="+from+"&to_time="+to+"&note="+note;
+  public saveTimeSheet(type : string,password: string, from: string, to: string, note: string): Observable<any> {
+    let saveUrlPrefix;
+    if(type == 'holiday'){
+      saveUrlPrefix = this.saveHolidayUrl;
+    }
+    else if (type == 'timestamp'){
+      saveUrlPrefix = this.saveTimeStampUrl;
+    }
+    else if (type == 'sicknote'){
+      saveUrlPrefix = this.saveSickNoteUrl;
+    }
+    let fullSaveUrl = saveUrlPrefix+"?password="+password+"&from_time="+from+"&to_time="+to+"&note="+note;
     return this.http.post(fullSaveUrl, { })
       .pipe(map(res => res));
   }

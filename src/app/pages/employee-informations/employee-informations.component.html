@@ -56,7 +56,7 @@
 </div> <!-- card.// -->
 
 <nb-card>
-
+<!--
   <nb-card-header>
     <button *ngIf="stampedIn" type="button" class="btn btn-danger col-12" status="primary"
       (click)="stampOut(employee.password)">Stamp Out</button>
@@ -64,17 +64,18 @@
       (click)="stampIn(employee.password)">Stamp In</button>
 
   </nb-card-header>
-
-  <nb-card-body *ngIf="showTimeSheets">
+-->
+  <nb-card-body *ngIf="actifTab == 'timeSheetsView'">
     <div class="row">
-      <div class="col-12">
-        <button type="button" class="btn btn-outline-primary" (click)="switchViews()">Add Timestamp</button>
-      </div>
       <hr />
       <div class="col-12">
         <nb-card size="small">
           <nb-tabset fullWidth>
-            <nb-tab tabTitle="TimeStamps">
+              <!-- **************** TimeSheets Tab ****************-->
+            <nb-tab tabTitle="TimeStamps" active="{{actifTab == 'timeSheetsView'}}" >
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary btn-block" (click)="switchViewsTo('timeStampForm')">Add TimeSheet</button>
+                </div>
               <nb-list class="user-activity-list">
                 <nb-list-item *ngFor="let item of filterTimeSheets('t')">
 
@@ -109,7 +110,13 @@
                 </nb-list-item>
               </nb-list>
             </nb-tab>
-            <nb-tab tabTitle="Sick note">
+            <!-- **************** End TimeSheets Tab ****************-->
+
+            <!-- **************** Sick notes Tab ****************-->
+            <nb-tab tabTitle="Sick note" active="{{actifTab == 'sickNotesView'}}">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary btn-block" (click)="switchViewsTo('sickNoteForm')">Add Sick Note</button>
+                </div>
               <nb-list class="user-activity-list">
                 <nb-list-item *ngFor="let item of filterTimeSheets('s')">
 
@@ -144,7 +151,13 @@
                 </nb-list-item>
               </nb-list>
             </nb-tab>
-            <nb-tab tabTitle="Holidays">
+            <!-- **************** End Sick Notes Tab ****************-->
+
+            <!-- **************** Holidays Tab ****************-->
+            <nb-tab tabTitle="Holidays" active="{{actifTab == 'holidaysView'}}">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary btn-block" (click)="switchViewsTo('holidayForm')">Add Holiday</button>
+                </div>
               <nb-list class="user-activity-list">
                 <nb-list-item *ngFor="let item of filterTimeSheets('h')">
 
@@ -179,15 +192,22 @@
                 </nb-list-item>
               </nb-list>
             </nb-tab>
+            <!-- **************** End Holidays Tab ****************-->
           </nb-tabset>
         </nb-card>
       </div>
     </div>
-
   </nb-card-body>
-  <nb-card-body *ngIf="showForms">
+
+
+  <!-- ************************ TIME STAMP FORM ************************-->
+
+  <nb-card-body *ngIf="actifTab == 'timeStampForm'">
     <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit(timeStampForm.value)">
       <div class="form-row">
+        <div class="form-group  col-12">
+          <input type="hidden" formControlName="type" [ngModel]="'timestamp'">
+        </div>
         <div class="form-group  col-4">
           <label for="inputfrom">From</label>
           <input nbInput matInput formControlName="fromDate" placeholder="From" [nbDatepicker]="formpicker">
@@ -216,11 +236,83 @@
             Add
           </button>
           <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="button"
-            (click)="switchViews()">
+            (click)="switchViewsTo('timeSheetsView')">
             Cancel
           </button>
         </div>
       </div>
     </form>
   </nb-card-body>
+
+  <!-- ************************ SICK NOTE FORM ************************-->
+  <nb-card-body *ngIf="actifTab == 'sickNoteForm'">
+      <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit(timeStampForm.value)">
+        <div class="form-group  col-12">
+          <input type="hidden" formControlName="type" [ngModel]="'sicknote'">
+        </div>
+        <div class="form-row">
+          <div class="form-group  col-6">
+            <label for="inputfrom">From</label>
+            <input nbInput matInput formControlName="fromDate" placeholder="From" [nbDatepicker]="formpicker">
+            <nb-datepicker #formpicker></nb-datepicker>
+          </div>
+          <div class="form-group  col-6">
+            <label for="inputto">To</label>
+            <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To" [nbDatepicker]="topicker">
+            <nb-datepicker #topicker></nb-datepicker>
+          </div>
+          <div class="form-group col-12">
+            <label for="exampleFormControlTextarea1">Note</label>
+            <textarea matInput name="note" formControlName="note" class="form-control" id="exampleFormControlTextarea1"
+              rows="3"></textarea>
+          </div>
+          <div class="form-group col-12 text-right">
+            <button id="submitbutton" name="submitbutton" class="btn btn-primary col-3">
+              Add
+            </button>
+            <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="button"
+              (click)="switchViewsTo('timeSheetsView')">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+
+     <!-- ************************ HOLIDAY FORM ************************-->
+  <nb-card-body *ngIf="actifTab == 'holidayForm'">
+      <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit(timeStampForm.value)">
+        <div class="form-row">
+          <div class="form-group  col-12">
+                <input type="hidden" formControlName="type" [ngModel]="'holiday'">
+          </div>
+          <div class="form-group  col-6">
+            <label for="inputfrom">From</label>
+            <input nbInput matInput formControlName="fromDate" placeholder="From" [nbDatepicker]="formpicker">
+            <nb-datepicker #formpicker></nb-datepicker>
+          </div>
+          <div class="form-group  col-6">
+            <label for="inputto">To</label>
+            <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To" [nbDatepicker]="topicker">
+            <nb-datepicker #topicker></nb-datepicker>
+          </div>
+          <div class="form-group col-12">
+            <label for="exampleFormControlTextarea1">Note</label>
+            <textarea matInput name="note" formControlName="note" class="form-control" id="exampleFormControlTextarea1"
+              rows="3"></textarea>
+          </div>
+          <div class="form-group col-12 text-right">
+            <button id="submitbutton" name="submitbutton" class="btn btn-primary col-3">
+              Add
+            </button>
+            <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="button"
+              (click)="switchViewsTo('timeSheetsView')">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+
+
 </nb-card>

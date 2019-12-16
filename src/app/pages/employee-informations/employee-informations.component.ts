@@ -5,6 +5,7 @@ import { Employee } from '../../@core/interfaces/employe';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ThymeConstants } from '../../@core/utils/thyme-constants';
 
 @Component({
   selector: 'ngx-employee-informations',
@@ -24,14 +25,15 @@ export class EmployeeInformationsComponent implements OnInit {
     },
   ];
 
+
   employee: Employee = <Employee>{};
   stampInResponse: Object;
   timeStampForm: FormGroup;
   employeeForm: FormGroup;
   stampedIn: boolean = false;
-  showTimeSheets: boolean = true;
-  showForms: boolean = false;
   formError: string;
+  actifTab: string;
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -45,13 +47,13 @@ export class EmployeeInformationsComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.getEmployee(id);
-    this.initialzeTimeStampForms();
+    this.initialzeTimeStampForm();
     this.initializeEmployeeForm();
     this.employeeForm.disable();
+    this.actifTab = ThymeConstants.TIME_SHEETS_VIEW;
   }
 
-
-  private getEmployee(id:string) {
+  private getEmployee(id: string) {
     this.employeeService.getEmployee(id).subscribe(employee => {
       this.employee = employee;
       this.initializeEmployeeForm();
@@ -86,39 +88,63 @@ export class EmployeeInformationsComponent implements OnInit {
     }
   }
 
-  public switchViews() {
-    let temp = this.showForms;
-    this.showTimeSheets = this.showForms;
-    this.showForms = !temp;
+  public switchViewsTo(viewID: string) {
+    this.actifTab = viewID;
   }
 
   public onSubmit(timeStampData) {
     let password = this.employee.password;
-    let fromDate = this.transformDate(timeStampData.fromDate) + "T" + timeStampData.fromTime;
-    let toDate = this.transformDate(timeStampData.toDate) + "T" + timeStampData.toTime;
+    let type = timeStampData.type;
     let note = timeStampData.note;
-    this.timeSheetService.saveTimeStamp(password, fromDate, toDate, note).subscribe(
-      response => {
-        this.switchViews();
-        response.status == 'success' ? this.router.navigate(['/pages/employee'])
-          : this.formError = "error";
-      });
+    let fromDate;
+    let toDate;
+    ({ fromDate, toDate } = this.processTimeStampFormByType(type, fromDate, timeStampData, toDate));
+    this.submitTimeStampForm(type, password, fromDate, toDate, note);
   }
 
-  public onSubmitEmployeeForm(employeeFormData){
+  private submitTimeStampForm(type: any, password: string, fromDate: any, toDate: any, note: any) {
+    this.timeSheetService.saveTimeSheet(type, password, fromDate, toDate, note).subscribe(response => {
+      if (response.status == 'success') {
+        this.ngOnInit();
+      }
+      else {
+        this.formError = "error";
+      }
+    });
+  }
+
+  private processTimeStampFormByType(type: any, fromDate: any, timeStampData: any, toDate: any) {
+    if (type == 'timestamp') {
+      fromDate = this.transformDate(timeStampData.fromDate) + "T" + timeStampData.fromTime;
+      toDate = this.transformDate(timeStampData.toDate) + "T" + timeStampData.toTime;
+      this.actifTab = ThymeConstants.TIME_SHEETS_VIEW;
+    }
+    else if (type == 'holiday') {
+      this.actifTab = ThymeConstants.HOLIDAYS_VIEW;
+      fromDate = this.transformDate(timeStampData.fromDate);
+      toDate = this.transformDate(timeStampData.toDate);
+    }
+    else if (type == 'sicknote') {
+      this.actifTab = ThymeConstants.SICK_NOTES_VIEW;
+      fromDate = this.transformDate(timeStampData.fromDate);
+      toDate = this.transformDate(timeStampData.toDate);
+    }
+    return { fromDate, toDate };
+  }
+
+  public onSubmitEmployeeForm(employeeFormData) {
     let updatedEmployee: Employee = this.employee;
-    if(employeeFormData.name != null){
+    if (employeeFormData.name != null) {
       updatedEmployee.name = employeeFormData.name;
     }
-    if(employeeFormData.password != null){
+    if (employeeFormData.password != null) {
       updatedEmployee.password = employeeFormData.password;
     }
     this.employeeService.updateEmployee(updatedEmployee).subscribe(
       response => {
-      this.employee.editMode = false;
-      this.employeeForm.disable();
-      console.log('id : '+this.employee.id)
-        response.status == 'success' ? this.router.navigate(['/pages/employee/'+this.employee.id])
+        this.employee.editMode = false;
+        this.employeeForm.disable();
+        response.status == 'success' ? this.router.navigate(['/pages/employee/' + this.employee.id])
           : this.formError = "error";
       });
   }
@@ -132,13 +158,14 @@ export class EmployeeInformationsComponent implements OnInit {
     return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 
-  private initialzeTimeStampForms() {
+  private initialzeTimeStampForm() {
     this.timeStampForm = this.formBuilder.group({
       fromDate: '',
       fromTime: '',
       toDate: '',
       toTime: '',
-      note: ''
+      note: '',
+      type: ''
     });
   }
 

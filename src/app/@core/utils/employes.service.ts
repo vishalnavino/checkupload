@@ -14,6 +14,7 @@ export class EmployesService {
   employeesUrl: string = ThymeConstants.HOST+'/employees/get';
   employeeUrl: string = ThymeConstants.HOST+'/employees/get_shifts?emp_ids=1&types=h;t;s';
   updateEmployeeUrl :string = ThymeConstants.HOST + '/employees/update';
+  insertEmployeeUrl :string = ThymeConstants.HOST + '/employees/insert';
   constructor(private http: HttpClient) { }
 
   public getEmployes(): Observable<Employee[]> {
@@ -38,14 +39,8 @@ export class EmployesService {
   }
 
   public insertEmployee(employee : Employee) : Observable<any>{
-    let fullSaveUrl = this.updateEmployeeUrl+"?id="+employee.id;
-    if(employee.name != null){
-      fullSaveUrl+="&name="+employee.name;
-    }
-    if(employee.password != null){
-      fullSaveUrl+="&password="+employee.password;
-    }
-    return this.http.post(fullSaveUrl, { })
+    let requestBody = JSON.stringify(employee);
+    return this.http.post(this.insertEmployeeUrl,requestBody,this.getHttpOptions())
       .pipe(map(res => res));
   }
 
@@ -101,6 +96,16 @@ export class EmployesService {
     timeSheet.deductedHours = responseItem.deductedHours;
     timeSheet.note = responseItem.note;
     return timeSheet;
+  }
+
+  private getHttpOptions() : Object {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      })
+    };
+    return httpOptions;
   }
 
 }

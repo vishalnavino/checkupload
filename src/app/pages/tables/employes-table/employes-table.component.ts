@@ -22,12 +22,20 @@ export class EmployesTableComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
     columns: {
+      id: {
+        title: 'id',
+        type: 'string',
+        show: false,
+        editable:false,
+        filter: true,
+      },
       name: {
         title: 'Name',
         type: 'string',
@@ -46,9 +54,8 @@ export class EmployesTableComponent implements OnInit {
       },
     },
   };
+
   public employes: Employee[];
-
-
   source: LocalDataSource = new LocalDataSource();
 
   constructor( private employesService: EmployesService,
@@ -59,7 +66,7 @@ export class EmployesTableComponent implements OnInit {
   public ngOnInit(): void {
     this.employesService.getEmployes().subscribe(
       employes => {
-        this.source.load(employes);
+        this.source = new LocalDataSource(employes); 
         this.employes = employes;
       });
 
@@ -78,11 +85,32 @@ export class EmployesTableComponent implements OnInit {
   }
 
   onCreateConfirm(event): void {
-    console.log("event"+event.newData.name)
    const employee: Employee = <Employee>{};
-   employee.name = event.newData.name;
-   employee.gross_salary_month = event.newData.gross_salary_month;
-   employee.contract_hours_month = event.newData.contract_hours_month;
+   this.mapEmployeeEventData(employee, event);
+   this.employesService.insertEmployee(employee).subscribe(
+    result => {
+      event.confirm.resolve(event.newData);
+    });
   }
 
+
+  onEditConfirm(event): void {
+    console.log('edit');
+    const employee: Employee = <Employee>{};
+    this.mapEmployeeEventData(employee, event);
+    console.log("id: "+event.newData.id)
+    employee.id = event.newData.id;
+    this.employesService.updateEmployee(employee).subscribe(
+     result => {
+       event.confirm.resolve(event.newData);
+     });
+   }
+
+
+
+  private mapEmployeeEventData(employee: Employee, event: any) {
+    employee.name = event.newData.name;
+    employee.gross_salary_month = event.newData.gross_salary_month;
+    employee.contract_hours_month = event.newData.contract_hours_month;
+  }
 }
