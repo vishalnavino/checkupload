@@ -9,10 +9,13 @@ export interface Employee {
     health_insurance_share: number,
     surcharge: number,
     contract_hours_month: number,
+    type:string,
+    working_contract:string,
     limit_hours_month: number,
     ref_id: number,
     timeSheets: ITimeSheet[],
     editMode : boolean;
+    valid:number
 
 
 }

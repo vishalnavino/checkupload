@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbCardModule, NbTabsetModule, NbRouteTabsetModule, NbListModule, NbButtonModule, NbInputModule, NbDatepickerModule } from '@nebular/theme';
+import { NbMenuModule, NbCardModule, NbTabsetModule, NbRouteTabsetModule, NbListModule, NbButtonModule, NbInputModule, NbDatepickerModule, NbSelectModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -13,6 +13,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { EmployeeInformationsComponent } from './employee-informations/employee-informations.component';
 import { FormsModule as ngFormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from './forms/forms.module';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { ShiftsComponent } from './shifts/shifts.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -32,6 +35,8 @@ import { FormsModule } from './forms/forms.module';
     NbInputModule,
     ngFormsModule,
     FormsModule,
+    NbSelectModule,
+
     ReactiveFormsModule
   ],
   declarations: [
@@ -39,6 +44,9 @@ import { FormsModule } from './forms/forms.module';
     EmployesComponent,
     EmployesTableComponent,
     EmployeeInformationsComponent,
+    AddEmployeeComponent,
+    ShiftsComponent,
+    SettingsComponent,
   ],
 })
 export class PagesModule {

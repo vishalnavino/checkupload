@@ -1,0 +1,26 @@
+nb-checkbox {
+    margin-bottom: 1rem;
+  }
+  
+  .form-inline [fullWidth] {
+    flex: 1;
+  }
+  .form-time{
+    margin-top: 20px!important;
+  }
+  
+  label{
+      width: 100%;
+  }
+  .form-inline > * {
+    margin: 0 1.5rem 1.5rem 0;
+  }
+
+  .form-select{
+    width: 250px!important;
+  }
+  
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+  

@@ -7,6 +7,9 @@ import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { EmployesComponent } from './employes/employes.component';
 import { EmployeeInformationsComponent } from './employee-informations/employee-informations.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ShiftsComponent } from './shifts/shifts.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,12 +20,24 @@ const routes: Routes = [{
       component: ECommerceComponent,
     },
     {
+      path: 'employee/add',
+      component: AddEmployeeComponent,
+    },
+    {
       path: 'employee/:id',
       component: EmployeeInformationsComponent,
     },
     {
-      path: 'employes',
+      path: 'employee',
       component: EmployesComponent,
+    },
+    {
+      path: 'shifts',
+      component: ShiftsComponent,
+    },
+    {
+      path: 'settings',
+      component: SettingsComponent,
     },
     {
       path: 'iot-dashboard',

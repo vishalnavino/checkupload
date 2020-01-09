@@ -1,6 +1,6 @@
 export interface ITimeSheet {
 
-    id: String,
+    id: string,
     from_time: String,
     to_time: String,
     type: String,

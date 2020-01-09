@@ -1,0 +1,24 @@
+<nb-card>
+    <nb-card-header>
+      Employes List
+     
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" 
+                       [source]="source"
+                       [ngClass]="hideCols"
+                       (deleteConfirm)="onDeleteConfirm($event)"
+                       (userRowSelect)="onUserRowSelect($event)" 
+                       (createConfirm)="onCreateConfirm($event)"
+                       (editConfirm)="onEditConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="add-button">
+            <a routerLink="add" class="ng2-smart-action ng2-smart-action-add-add"><i class="nb-plus"></i></a>
+        </div>
+    </nb-card-footer>
+  </nb-card>
+  
