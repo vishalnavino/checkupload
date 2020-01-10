@@ -16,6 +16,7 @@ import { FormsModule } from './forms/forms.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { SettingsComponent } from './settings/settings.component';
+import {MatSnackBarModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { SettingsComponent } from './settings/settings.component';
     ngFormsModule,
     FormsModule,
     NbSelectModule,
-
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
   declarations: [

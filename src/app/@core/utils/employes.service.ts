@@ -12,13 +12,11 @@ import { environment } from '../../../environments/environment';
 })
 export class EmployesService {
   apiUrl: string = environment.apiUrl;
-
   employeesUrl: string = ThymeConstants.HOST+'/employees/get';
   employeeUrl: string = ThymeConstants.HOST+'/employees/get_shifts?emp_ids=1&types=h;t;s';
   updateEmployeeUrl :string = ThymeConstants.HOST + '/employees/update';
   insertEmployeeUrl :string = ThymeConstants.HOST + '/employees/insert';
   constructor(private http: HttpClient) { }
-
   public getEmployes(): Observable<Employee[]> {
     return this.http.get(this.getApiPath('employees/readall'),{headers: this.getThymeApiHeaders()}).pipe(map(res => this.mapEmployesFromApi(res)));
   }
@@ -26,7 +24,6 @@ export class EmployesService {
   public getEmployee(id: String): Observable<Employee> {
     return this.http.get(this.getApiPath('employees/'+id)).pipe(map(res => this.mapEmployeeFromApi(res)));
   }
-
   public updateEmployee(employee : Employee) : Observable<any>{
     // let fullSaveUrl = this.updateEmployeeUrl+"?id="+employee.id;
     // if(employee.name != null){
@@ -43,6 +40,10 @@ export class EmployesService {
     let requestBody = JSON.stringify(employee);
     return this.http.post(this.insertEmployeeUrl,requestBody,this.getHttpOptions())
       .pipe(map(res => res));
+  }
+
+  public deleteEmployee(id: String) {
+    return this.http.delete(this.getApiPath('employees/'+id))
   }
 
   

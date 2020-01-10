@@ -40,8 +40,8 @@ export class EmployesTableComponent implements OnInit {
         title: 'Name',
         type: 'string',
       },
-      email: {
-        title: 'Name',
+      type: {
+        title: 'Type',
         type: 'string',
       },
       gross_salary_month: {
@@ -66,6 +66,7 @@ export class EmployesTableComponent implements OnInit {
   public ngOnInit(): void {
     this.employesService.getEmployes().subscribe(
       employes => {
+        employes = employes.filter(elt => elt.valid === 1)
         this.source = new LocalDataSource(employes); 
         this.employes = employes;
       });

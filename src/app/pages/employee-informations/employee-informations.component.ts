@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThymeConstants } from '../../@core/utils/thyme-constants';
+import { LocalDataSource } from 'ng2-smart-table';
+import { SnackbarService } from '../../services/snake-bar.service';
 
 @Component({
   selector: 'ngx-employee-informations',
@@ -44,6 +46,47 @@ export class EmployeeInformationsComponent implements OnInit {
         type: 'string',
       },
       to: {
+        title: 'To',
+        type: 'string',
+      },
+      note: {
+        title: 'Note',
+        type: 'string',
+      },
+
+    },
+  };
+  timesheetSetting = {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: false,
+
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    columns: {
+      id: {
+        title: 'id',
+        type: 'string',
+        show: false,
+        editable:false,
+        filter: true,
+      },
+      from_time: {
+        title: 'Name',
+        type: 'string',
+      },
+      to_time: {
         title: 'To',
         type: 'string',
       },
@@ -234,7 +277,7 @@ exData=[
       "ts": "2020-01-03T14:15:54"
   }
 ]
-
+  empId:string;
   employee: Employee = <Employee>{};
   stampInResponse: Object;
   timeStampForm: FormGroup;
@@ -242,6 +285,9 @@ exData=[
   stampedIn: boolean = false;
   formError: string;
   actifTab: string;
+  sourceTimesheets: LocalDataSource = new LocalDataSource();
+  sourceSlickNotes: LocalDataSource = new LocalDataSource();
+  sourceHoliDays: LocalDataSource = new LocalDataSource();
 
 
   constructor(private router: Router,
@@ -249,17 +295,23 @@ exData=[
     private employeeService: EmployesService,
     private timeSheetService: TimeSheetService,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,
+    private snakebar:SnackbarService) {
 
   }
 
   ngOnInit() {
     this.initEmployeeForm()
     this.route.params.subscribe(params => {
+      this.empId = params.id
       this.getEmployee(params.id);
+      
     });
 
-    
+    this.sourceTimesheets = new LocalDataSource(this.exData.filter(elt => elt.type == 't')); 
+    this.sourceSlickNotes = new LocalDataSource(this.exData.filter(elt => elt.type == 's')); 
+    this.sourceHoliDays = new LocalDataSource(this.exData.filter(elt => elt.type == 'h')); 
+
     this.initialzeTimeStampForm();
     // this.initializeEmployeeForm();
     // this.employeeForm.disable();
@@ -269,9 +321,15 @@ exData=[
   private getEmployee(id: string) {
     this.employeeService.getEmployee(id).subscribe(employee => {
       this.employee = employee;
+      if(this.employee.valid === 0){
+        this.router.navigate(['pages/employee'])
+      }
       this.setDataForm();
+    },
+    error=>{
+      this.snakebar.FailureError('Error')
     });
-    ;
+    
   }
 
     // Submit data employee add form
@@ -281,8 +339,20 @@ exData=[
       }
       this.employeeService.updateEmployee(this.employeeForm.value).subscribe(
         result => {
-          console.log(result)
+          this.snakebar.SuccessSnackBar('Update Employee Inforamation')
+        },
+        error=>{
+          this.snakebar.FailureError('Error')
         });
+    }
+
+
+    // delete Employee
+    deleteEmployeeClick(id:string){
+      this.employeeService.deleteEmployee(id).subscribe(
+        result => {
+          this.snakebar.SuccessSnackBar('Succefully Delete Employee')
+        })
     }
 
   public stampIn(password: string): void {
@@ -306,12 +376,12 @@ exData=[
     );
   }
 
-  public filterTimeSheets(type) {
+ filterTimeSheets(type) {
     // if (this.employee.timeSheets != null) {
     //   return this.employee.timeSheets.filter(elt => elt.type == type);
     // }
-      return this.exData.filter(elt => elt.type == type);
-    
+    // this.source = new LocalDataSource(this.exData.filter(elt => elt.type == type)); 
+    //   return    this.source  
   }
 
   public switchViewsTo(viewID: string) {

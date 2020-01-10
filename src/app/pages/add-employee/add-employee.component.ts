@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from '../../services/employees.service';
+import { SnackbarService } from '../../services/snake-bar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-add-employee',
@@ -9,7 +11,7 @@ import { EmployeesService } from '../../services/employees.service';
 })
 export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
-  constructor(private fb: FormBuilder,private emp: EmployeesService) { }
+  constructor(private fb: FormBuilder,private emp: EmployeesService,private snakebar:SnackbarService,private router: Router) { }
 
   ngOnInit() {
     this.initForm()
@@ -22,7 +24,11 @@ export class AddEmployeeComponent implements OnInit {
     }
     this.emp.addEmployee(this.employeeForm.value).subscribe(
       result => {
-        console.log(result)
+        this.snakebar.SuccessSnackBar('Employee Added Succefully')
+        this.router.navigate(['pages/employee'])
+      },
+      error=>{
+        this.snakebar.SuccessSnackBar('Error')
       });
   }
 
@@ -39,8 +45,8 @@ export class AddEmployeeComponent implements OnInit {
       working_contract:       [null, Validators.required],
       contract_hours_month:   [null, Validators.required],
       limit_hours_month:      [null, Validators.required],
-      ref_id:                 [null, Validators.required],
-      valid:                  [null, Validators.required],
+      ref_id:                 [0],
+      valid:                  [1],
     })
   }
 

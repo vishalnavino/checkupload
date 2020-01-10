@@ -31,3 +31,7 @@
 
   @include nb-overrides();
 };
+
+.nb-theme-default ng2-smart-table tbody tr:hover {
+  cursor: pointer
+};
