@@ -1,9 +1,7 @@
 <div class="card">
   <nb-card-header>Edit Employee</nb-card-header>
-
   <div class="card-body">
     <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
-
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
@@ -44,7 +42,6 @@
               Gross Salary Month is Required
             </div>
           </div>
-
           <div class="form-group">
             <label class="label">Health Insurance Share</label>
             <input type="number" nbInput fullWidth formControlName="health_insurance_share"
@@ -100,28 +97,27 @@
           </div>
         </div>
       </div>
-
       <!-- <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Ref Id</label>
-            <input type="number" nbInput fullWidth formControlName="ref_id" placeholder="Ref Id">
-            <div class="form-error"
-              *ngIf="( b.ref_id.dirty || b.ref_id.touched ) && b.ref_id.invalid && b.ref_id.errors">
-              Ref Id is Required
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="label">Ref Id</label>
+              <input type="number" nbInput fullWidth formControlName="ref_id" placeholder="Ref Id">
+              <div class="form-error"
+                *ngIf="( b.ref_id.dirty || b.ref_id.touched ) && b.ref_id.invalid && b.ref_id.errors">
+                Ref Id is Required
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">valid</label>
-            <input type="number" nbInput fullWidth formControlName="valid" placeholder="valid">
-            <div class="form-error" *ngIf="( b.valid.dirty || b.valid.touched ) && b.valid.invalid && b.valid.errors">
-              valid is Required
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="label">valid</label>
+              <input type="number" nbInput fullWidth formControlName="valid" placeholder="valid">
+              <div class="form-error" *ngIf="( b.valid.dirty || b.valid.touched ) && b.valid.invalid && b.valid.errors">
+                valid is Required
+              </div>
             </div>
           </div>
-        </div>
-      </div> -->
+          </div> -->
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
@@ -133,27 +129,25 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="action-button">
-        <button type="submit" nbButton>Update</button>  
+        <button type="submit" nbButton>Update</button>
         <a nbButton class="delete-button" (click)="deleteEmployeeClick(empId)">Delete</a>
       </div>
-
     </form>
   </div>
-</div> <!-- card.// -->
-
+</div>
+<!-- card.// -->
 <nb-card>
   <!--
-  <nb-card-header>
-    <button *ngIf="stampedIn" type="button" class="btn btn-danger col-12" status="primary"
-      (click)="stampOut(employee.password)">Stamp Out</button>
-    <button *ngIf="!stampedIn" type="button" class="btn btn-success col-12" status="primary"
-      (click)="stampIn(employee.password)">Stamp In</button>
-
-  </nb-card-header>
--->
+       <nb-card-header>
+         <button *ngIf="stampedIn" type="button" class="btn btn-danger col-12" status="primary"
+           (click)="stampOut(employee.password)">Stamp Out</button>
+         <button *ngIf="!stampedIn" type="button" class="btn btn-success col-12" status="primary"
+           (click)="stampIn(employee.password)">Stamp In</button>
+       
+       </nb-card-header>
+       -->
   <nb-card-body *ngIf="actifTab == 'timeSheetsView'">
     <div class="row">
       <hr />
@@ -167,117 +161,98 @@
                   (click)="switchViewsTo('timeStampForm')">Add TimeSheet</button>
               </div>
               <nb-list class="user-activity-list">
-       
               </nb-list>
-              <ng2-smart-table [settings]="timesheetSetting" 
-              [source]="sourceTimesheets"
-              [ngClass]="hideCols"
-              (deleteConfirm)="onDeleteConfirm($event)"
-              (userRowSelect)="onUserRowSelect($event)" 
-              (createConfirm)="onCreateConfirm($event)"
-              (editConfirm)="onEditConfirm($event)">
-</ng2-smart-table>
-
+              <ng2-smart-table [settings]="timesheetSetting" [source]="sourceTimesheets" [ngClass]="hideCols"
+                (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
+              </ng2-smart-table>
             </nb-tab>
             <!-- **************** End TimeSheets Tab ****************-->
-
             <!-- **************** Sick notes Tab ****************-->
             <nb-tab tabTitle="Sick note" active="{{actifTab == 'sickNotesView'}}">
               <div class="col-12">
                 <button type="button" class="btn btn-outline-primary btn-block"
                   (click)="switchViewsTo('sickNoteForm')">Add Sick Note</button>
               </div>
-
-              <ng2-smart-table [settings]="timesheetSetting" 
-              [source]="sourceSlickNotes"
-              [ngClass]="hideCols"
-              (deleteConfirm)="onDeleteConfirm($event)"
-              (userRowSelect)="onUserRowSelect($event)" 
-              (createConfirm)="onCreateConfirm($event)"
-              (editConfirm)="onEditConfirm($event)">
-</ng2-smart-table>
+              <ng2-smart-table [settings]="timesheetSetting" [source]="sourceSlickNotes" [ngClass]="hideCols"
+                (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
+              </ng2-smart-table>
               <nb-list class="user-activity-list">
                 <!-- <nb-list-item *ngFor="let item of filterTimeSheets('s')">
-
-                  <div class="visited-date">
-                    <div class="caption">Start</div>
-                    {{ item.from_time | date:'medium' }}
-                  </div>
-
-                  <div class="visited-date">
-                    <div class="caption">End</div>
-                    {{ item.to_time  | date:'medium' }}
-                  </div>
-
-                  <div class="visited-pages-count">
-                    <div class="caption">Nb Hours</div>
-                    <div class="value">{{ item.manual_time  }}</div>
-                  </div>
-
-                  <div class="visited-pages-count">
-                    <div class="caption"></div>
-                    <div class="value">{{ item.note }}</div>
-                  </div>
-                  
-                    <div class="visited-percentages">
-                      <div class="caption">New visits, %</div>
-                      <div class="delta value" [class.up]="item.deltaUp" [class.down]="!item.deltaUp">
-                        <nb-icon [icon]="item.deltaUp ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
-                        {{ item.newVisits }}%
-                      </div>
-                    </div>
-             
-                </nb-list-item> -->
+                            <div class="visited-date">
+                              <div class="caption">Start</div>
+                              {{ item.from_time | date:'medium' }}
+                            </div>
+                            
+                            <div class="visited-date">
+                              <div class="caption">End</div>
+                              {{ item.to_time  | date:'medium' }}
+                            </div>
+                            
+                            <div class="visited-pages-count">
+                              <div class="caption">Nb Hours</div>
+                              <div class="value">{{ item.manual_time  }}</div>
+                            </div>
+                            
+                            <div class="visited-pages-count">
+                              <div class="caption"></div>
+                              <div class="value">{{ item.note }}</div>
+                            </div>
+                            
+                              <div class="visited-percentages">
+                                <div class="caption">New visits, %</div>
+                                <div class="delta value" [class.up]="item.deltaUp" [class.down]="!item.deltaUp">
+                                  <nb-icon [icon]="item.deltaUp ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
+                                  {{ item.newVisits }}%
+                                </div>
+                              </div>
+                            
+                            </nb-list-item> -->
               </nb-list>
             </nb-tab>
             <!-- **************** End Sick Notes Tab ****************-->
-
             <!-- **************** Holidays Tab ****************-->
             <nb-tab tabTitle="Holidays" active="{{actifTab == 'holidaysView'}}">
               <div class="col-12">
                 <button type="button" class="btn btn-outline-primary btn-block"
                   (click)="switchViewsTo('holidayForm')">Add Holiday</button>
               </div>
-              <ng2-smart-table [settings]="timesheetSetting" 
-              [source]="sourceHoliDays"
-              [ngClass]="hideCols"
-              (deleteConfirm)="onDeleteConfirm($event)"
-              (userRowSelect)="onUserRowSelect($event)" 
-              (createConfirm)="onCreateConfirm($event)"
-              (editConfirm)="onEditConfirm($event)">
-</ng2-smart-table>
+              <ng2-smart-table [settings]="timesheetSetting" [source]="sourceHoliDays" [ngClass]="hideCols"
+                (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
+              </ng2-smart-table>
               <nb-list class="user-activity-list">
                 <!-- <nb-list-item *ngFor="let item of filterTimeSheets('h')">
-
-                  <div class="visited-date">
-                    <div class="caption">Start</div>
-                    {{ item.from_time | date:'medium' }}
-                  </div>
-
-                  <div class="visited-date">
-                    <div class="caption">End</div>
-                    {{ item.to_time  | date:'medium' }}
-                  </div>
-
-                  <div class="visited-pages-count">
-                    <div class="caption">Nb Hours</div>
-                    <div class="value">{{ item.manual_time  }}</div>
-                  </div>
-
-                  <div class="visited-pages-count">
-                    <div class="caption"></div>
-                    <div class="value">{{ item.note }}</div>
-                  </div>
-                  
-                    <div class="visited-percentages">
-                      <div class="caption">New visits, %</div>
-                      <div class="delta value" [class.up]="item.deltaUp" [class.down]="!item.deltaUp">
-                        <nb-icon [icon]="item.deltaUp ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
-                        {{ item.newVisits }}%
-                      </div>
-                    </div>
-             
-                </nb-list-item> -->
+                            <div class="visited-date">
+                              <div class="caption">Start</div>
+                              {{ item.from_time | date:'medium' }}
+                            </div>
+                            
+                            <div class="visited-date">
+                              <div class="caption">End</div>
+                              {{ item.to_time  | date:'medium' }}
+                            </div>
+                            
+                            <div class="visited-pages-count">
+                              <div class="caption">Nb Hours</div>
+                              <div class="value">{{ item.manual_time  }}</div>
+                            </div>
+                            
+                            <div class="visited-pages-count">
+                              <div class="caption"></div>
+                              <div class="value">{{ item.note }}</div>
+                            </div>
+                            
+                              <div class="visited-percentages">
+                                <div class="caption">New visits, %</div>
+                                <div class="delta value" [class.up]="item.deltaUp" [class.down]="!item.deltaUp">
+                                  <nb-icon [icon]="item.deltaUp ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
+                                  {{ item.newVisits }}%
+                                </div>
+                              </div>
+                            
+                            </nb-list-item> -->
               </nb-list>
             </nb-tab>
             <!-- **************** End Holidays Tab ****************-->
@@ -286,89 +261,121 @@
       </div>
     </div>
   </nb-card-body>
-
-
   <!-- ************************ TIME STAMP FORM ************************-->
-
   <nb-card-body *ngIf="actifTab == 'timeStampForm'">
     <!-- timesheet list -->
- 
     <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
         <div class="form-group  col-12">
           <input type="hidden" formControlName="type" [ngModel]="'timestamp'">
         </div>
-        <div class="form-group  col-4">
+        <div class="form-group  col-3">
           <label for="inputfrom">From</label>
-          <input nbInput matInput formControlName="from_date" placeholder="From" [nbDatepicker]="formpicker">
+          <input class="form-control" nbInput matInput formControlName="from_date" placeholder="From"
+            [nbDatepicker]="formpicker">
           <nb-datepicker #formpicker></nb-datepicker>
+          <div class="form-error"
+            *ngIf="( t.from_date.dirty || t.from_date.touched ) && t.from_date.invalid && t.from_date.errors">
+            From Date is Required
+          </div>
         </div>
-        <div class="form-group  col-2">
-          <input matInput name="from_time" type="time" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" formControlName="from_time"
-            class="form-control" id="from-time" name="from-time" />
+        <div class="form-group  col-3">
+          <label for="inputfrom">From Time</label>
+          <input matInput name="from_time" type="time" formControlName="from_time" class="form-control" id="from-time"
+            name="from-time" />
         </div>
-        <div class="form-group  col-4">
+        <div class="form-group  col-3">
           <label for="inputto">To</label>
-          <input nbInput matInput name="to_date" formControlName="to_date" placeholder="To" [nbDatepicker]="topicker">
+          <input class="form-control" nbInput matInput name="to_date" formControlName="to_date" placeholder="To"
+            [nbDatepicker]="topicker">
           <nb-datepicker #topicker></nb-datepicker>
         </div>
-        <div class="form-group  col-2">
+        <div class="form-group  col-3">
+          <label for="inputfrom">To Time</label>
           <input matInput name="to_time" type="time" formControlName="to_time" class="form-control" id="to-time"
+            name="from-time" />
+        </div>
+        <div class="form-group col-3">
+          <label for="exampleFormControlTextarea1">Manual Time</label>
+          <input matInput name="manual_time" type="time" formControlName="manual_time" class="form-control" id="to-time"
             name="from-time" />
         </div>
         <div class="form-group col-12">
           <label for="exampleFormControlTextarea1">Note</label>
           <textarea matInput name="note" formControlName="note" class="form-control" id="exampleFormControlTextarea1"
             rows="3"></textarea>
+          <div class="form-error" *ngIf="( t.note.dirty || t.note.touched ) && t.note.invalid && t.note.errors">
+            Note is Required
+          </div>
         </div>
         <div class="form-group col-12 text-right">
           <button id="submitbutton" name="submitbutton" class="btn btn-primary col-3">
             Add
           </button>
-          <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="submit"
-            (click)="switchViewsTo('timeSheetsView')">
+          <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="submit">
             Cancel
           </button>
         </div>
       </div>
     </form>
   </nb-card-body>
-
   <!-- ************************ SICK NOTE FORM ************************-->
   <nb-card-body *ngIf="actifTab == 'sickNoteForm'">
-    <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit(timeStampForm.value)">
-      <div class="form-group  col-12">
-        <input type="hidden" formControlName="type" [ngModel]="'sicknote'">
-      </div>
+    <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
-        <div class="form-group  col-6">
-          <label for="inputfrom">From</label>
-          <input nbInput matInput formControlName="from_date" placeholder="From" [nbDatepicker]="formpicker">
-          <nb-datepicker #formpicker></nb-datepicker>
+        <div class="form-group  col-12">
+          <input type="hidden" formControlName="type" [ngModel]="'sicknote'">
         </div>
-        <div class="form-group  col-6">
+        <div class="form-group  col-3">
+          <label for="inputfrom">From</label>
+          <input class="form-control" nbInput matInput formControlName="from_date" placeholder="From"
+            [nbDatepicker]="formpicker">
+          <nb-datepicker #formpicker></nb-datepicker>
+          <div class="form-error"
+            *ngIf="( t.from_date.dirty || t.from_date.touched ) && t.from_date.invalid && t.from_date.errors">
+            From Date is Required
+          </div>
+        </div>
+        <div class="form-group  col-3">
+          <label for="inputfrom">From Time</label>
+          <input matInput name="from_time" type="time" formControlName="from_time" class="form-control" id="from-time"
+            name="from-time" />
+        </div>
+        <div class="form-group  col-3">
           <label for="inputto">To</label>
-          <input nbInput matInput name="to_date" formControlName="to_date" placeholder="To" [nbDatepicker]="topicker">
+          <input class="form-control" nbInput matInput name="to_date" formControlName="to_date" placeholder="To"
+            [nbDatepicker]="topicker">
           <nb-datepicker #topicker></nb-datepicker>
+        </div>
+        <div class="form-group  col-3">
+          <label for="inputfrom">To Time</label>
+          <input matInput name="to_time" type="time" formControlName="to_time" class="form-control" id="to-time"
+            name="from-time" />
+        </div>
+        <div class="form-group col-3">
+          <label for="exampleFormControlTextarea1">Manual Time</label>
+          <input matInput name="manual_time" type="time" formControlName="manual_time" class="form-control" id="to-time"
+            name="from-time" />
         </div>
         <div class="form-group col-12">
           <label for="exampleFormControlTextarea1">Note</label>
           <textarea matInput name="note" formControlName="note" class="form-control" id="exampleFormControlTextarea1"
             rows="3"></textarea>
+          <div class="form-error" *ngIf="( t.note.dirty || t.note.touched ) && t.note.invalid && t.note.errors">
+            Note is Required
+          </div>
         </div>
         <div class="form-group col-12 text-right">
           <button id="submitbutton" name="submitbutton" class="btn btn-primary col-3">
             Add
           </button>
-          <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="button"
-            (click)="switchViewsTo('timeSheetsView')">
+          <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="submit">
             Cancel
           </button>
         </div>
       </div>
     </form>
   </nb-card-body>
-
   <!-- ************************ HOLIDAY FORM ************************-->
   <nb-card-body *ngIf="actifTab == 'holidayForm'">
     <form [formGroup]="timeStampForm" (ngSubmit)="onSubmit()">
@@ -376,33 +383,54 @@
         <div class="form-group  col-12">
           <input type="hidden" formControlName="type" [ngModel]="'holiday'">
         </div>
-        <div class="form-group  col-6">
+        <div class="form-group  col-3">
           <label for="inputfrom">From</label>
-          <input nbInput matInput formControlName="from_date" placeholder="From" [nbDatepicker]="formpicker">
+          <input class="form-control" nbInput matInput formControlName="from_date" placeholder="From"
+            [nbDatepicker]="formpicker">
           <nb-datepicker #formpicker></nb-datepicker>
+          <div class="form-error"
+            *ngIf="( t.from_date.dirty || t.from_date.touched ) && t.from_date.invalid && t.from_date.errors">
+            From Date is Required
+          </div>
         </div>
-        <div class="form-group  col-6">
+        <div class="form-group  col-3">
+          <label for="inputfrom">From Time</label>
+          <input matInput name="from_time" type="time" formControlName="from_time" class="form-control" id="from-time"
+            name="from-time" />
+        </div>
+        <div class="form-group  col-3">
           <label for="inputto">To</label>
-          <input nbInput matInput name="to_date" formControlName="to_date" placeholder="To" [nbDatepicker]="topicker">
+          <input class="form-control" nbInput matInput name="to_date" formControlName="to_date" placeholder="To"
+            [nbDatepicker]="topicker">
           <nb-datepicker #topicker></nb-datepicker>
+        </div>
+        <div class="form-group  col-3">
+          <label for="inputfrom">To Time</label>
+          <input matInput name="to_time" type="time" formControlName="to_time" class="form-control" id="to-time"
+            name="from-time" />
+        </div>
+        <div class="form-group col-3">
+          <label for="exampleFormControlTextarea1">Manual Time</label>
+          <input matInput name="manual_time" type="time" formControlName="manual_time" class="form-control" id="to-time"
+            name="from-time" />
         </div>
         <div class="form-group col-12">
           <label for="exampleFormControlTextarea1">Note</label>
           <textarea matInput name="note" formControlName="note" class="form-control" id="exampleFormControlTextarea1"
             rows="3"></textarea>
+          <div class="form-error" *ngIf="( t.note.dirty || t.note.touched ) && t.note.invalid && t.note.errors">
+            Note is Required
+          </div>
         </div>
         <div class="form-group col-12 text-right">
           <button id="submitbutton" name="submitbutton" class="btn btn-primary col-3">
             Add
           </button>
-          <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="button"
-            (click)="switchViewsTo('timeSheetsView')">
+          <button id="cancelbutton" name="cancelbutton" class="btn btn-danger col-3" type="submit">
             Cancel
           </button>
         </div>
       </div>
     </form>
   </nb-card-body>
-
-
 </nb-card>

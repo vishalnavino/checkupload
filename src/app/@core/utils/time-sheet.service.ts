@@ -27,8 +27,8 @@ export class TimeSheetService {
     return this.http.get(this.timeSheetsUrl)
       .pipe(map(res => this.mapProductsFromApi(res)));
   }
-  public getShifts(): Observable<ITimeSheet[]> {
-    return this.http.get(this.getApiPath('employees/get_shifts?emp_ids=1&types=h;t;s'))
+  public getShifts(url?:string): Observable<ITimeSheet[]> {
+    return this.http.get(this.getApiPath('employees/get_shifts?'+url))
       .pipe(map(res => this.mapProductsFromApi(res['timesheets'].content)));
   }
   

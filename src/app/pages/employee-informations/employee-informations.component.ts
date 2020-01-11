@@ -75,26 +75,29 @@ export class EmployeeInformationsComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'id',
-        type: 'string',
-        show: false,
-        editable:false,
-        filter: true,
-      },
+      // id: {
+      //   title: 'id',
+      //   type: 'string',
+      //   show: false,
+      //   editable:false,
+      //   filter: true,
+      // },
       from_time: {
-        title: 'Name',
+        title: 'From Time',
         type: 'string',
       },
       to_time: {
-        title: 'To',
+        title: 'To Time',
         type: 'string',
       },
       note: {
         title: 'Note',
         type: 'string',
       },
-
+      manual_time: {
+        title: 'Manual Time',
+        type: 'string',
+      },
     },
   };
   tabs: any[] = [
@@ -108,174 +111,7 @@ export class EmployeeInformationsComponent implements OnInit {
     },
   ];
 exData=[
-  {
-      "id": 18,
-      "from_time": "2020-01-08T02:52:05",
-      "to_time": "2020-01-11T21:40:17",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": "asdfasd",
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:52:05"
-  },
-  {
-      "id": 14,
-      "from_time": "2020-01-07T06:45:52",
-      "to_time": "2020-01-07T06:46:07",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": 'india',
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:45:52"
-  },
-  {
-      "id": 13,
-      "from_time": "2020-01-07T06:42:22",
-      "to_time": "2020-01-07T06:42:30",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:42:22"
-  },
-  {
-      "id": 12,
-      "from_time": "2020-01-07T06:41:43",
-      "to_time": "2020-01-07T06:41:55",
-      "type": "h",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:41:43"
-  },
-  {
-      "id": 11,
-      "from_time": "2020-01-07T06:39:13",
-      "to_time": "2020-01-07T06:39:22",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:39:13"
-  },
-  {
-      "id": 10,
-      "from_time": "2020-01-07T06:33:09",
-      "to_time": "2020-01-07T06:33:21",
-      "type": "s",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:33:09"
-  },
-  {
-      "id": 9,
-      "from_time": "2020-01-07T06:25:35",
-      "to_time": "2020-01-07T06:32:29",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:25:35"
-  },
-  {
-      "id": 8,
-      "from_time": "2020-01-07T06:20:17",
-      "to_time": "2020-01-07T06:24:45",
-      "type": "s",
-      "manual_time": "00:00:00",
-      "note": 'chicago',
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-07T06:20:20"
-  },
-  {
-      "id": 6,
-      "from_time": "2020-01-04T12:08:37",
-      "to_time": "2020-01-04T12:08:55",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-04T12:08:37"
-  },
-  {
-      "id": 5,
-      "from_time": "2020-01-04T11:28:02",
-      "to_time": "2020-01-04T11:28:20",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-04T11:28:02"
-  },
-  {
-      "id": 4,
-      "from_time": "2020-01-04T10:21:59",
-      "to_time": "2020-01-04T10:22:21",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-04T10:21:59"
-  },
-  {
-      "id": 3,
-      "from_time": "2020-01-04T10:19:30",
-      "to_time": "2020-01-04T10:20:04",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-04T10:19:30"
-  },
-  {
-      "id": 2,
-      "from_time": "2020-01-04T10:11:41",
-      "to_time": "2020-01-04T10:15:13",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-04T10:11:41"
-  },
-  {
-      "id": 1,
-      "from_time": "2020-01-03T14:15:53",
-      "to_time": "2020-01-04T10:11:23",
-      "type": "t",
-      "manual_time": "00:00:00",
-      "note": null,
-      "ref_id": 0,
-      "valid": 1,
-      "employee_id": null,
-      "ts": "2020-01-03T14:15:54"
-  }
+ 
 ]
   empId:string;
   employee: Employee = <Employee>{};
@@ -308,9 +144,9 @@ exData=[
       
     });
 
-    this.sourceTimesheets = new LocalDataSource(this.exData.filter(elt => elt.type == 't')); 
-    this.sourceSlickNotes = new LocalDataSource(this.exData.filter(elt => elt.type == 's')); 
-    this.sourceHoliDays = new LocalDataSource(this.exData.filter(elt => elt.type == 'h')); 
+    this.getTimeSheetData()
+
+ 
 
     this.initialzeTimeStampForm();
     // this.initializeEmployeeForm();
@@ -386,10 +222,26 @@ exData=[
 
   public switchViewsTo(viewID: string) {
     this.actifTab = viewID;
+    if(this.actifTab == 'holidayForm'){
+      this.timeStampForm.controls.type.setValue('h')
+    }
+    else if (this.actifTab == 'timeStampForm'){
+      this.timeStampForm.controls.type.setValue('t')
+    }
+    else if (this.actifTab == 'sickNoteForm'){
+      this.timeStampForm.controls.type.setValue('s')
+    }
   }
 
   public onSubmit() {
-    debugger
+ debugger
+    // if(this.timeStampForm.invalid){
+    //   return ;
+    // }
+    if(this.timeStampForm.value.manual_time !== '00:00:00'){
+      this.timeStampForm.controls.manual_time.setValue(this.timeStampForm.value.manual_time+':00')
+    }
+    // this.switchViewsTo('timeSheetsView')
     let password = this.employee.password;
     let type = this.timeStampForm.value.type;
     let note = this.timeStampForm.value.note;
@@ -403,13 +255,12 @@ exData=[
     this.timeStampForm.controls.type.setValue(type)
 
     this.timeSheetService.saveTimeSheet(this.timeStampForm.value).subscribe(response => {
-      if (response.status == 'success') {
-        this.ngOnInit();
-      }
-      else {
-        this.formError = "error";
-      }
-    });
+        this.snakebar.SuccessSnackBar('Timesheet added succefully')
+        this.actifTab =  'timeSheetsView'   
+        this.getTimeSheetData()  
+       }
+
+    );
   }
 
   private processTimeStampFormByType(type: any, from_date: any, timeStampData: any, to_date: any) {
@@ -420,13 +271,13 @@ exData=[
     }
     else if (type == 'holiday') {
       this.actifTab = ThymeConstants.HOLIDAYS_VIEW;
-      this.timeStampForm.controls.from_date.setValue(this.transformDate(timeStampData.from_date))
-      this.timeStampForm.controls.to_date.setValue(this.transformDate(timeStampData.to_date))
+      this.timeStampForm.controls.from_time.setValue(this.transformDate(timeStampData.from_date) + "T" + timeStampData.from_time + ":00")
+      this.timeStampForm.controls.to_time.setValue(this.transformDate(timeStampData.to_date) + "T" + timeStampData.to_time + ":00")
     }
     else if (type == 'sicknote') {
       this.actifTab = ThymeConstants.SICK_NOTES_VIEW;
-      this.timeStampForm.controls.from_date.setValue(this.transformDate(timeStampData.from_date))
-      this.timeStampForm.controls.to_date.setValue(this.transformDate(timeStampData.to_date))
+      this.timeStampForm.controls.from_time.setValue(this.transformDate(timeStampData.from_date) + "T" + timeStampData.from_time + ":00")
+      this.timeStampForm.controls.to_time.setValue(this.transformDate(timeStampData.to_date) + "T" + timeStampData.to_time + ":00")
     }
     return { from_date, to_date };
   }
@@ -465,7 +316,10 @@ exData=[
       to_time:   [null, Validators.required],
       note:     [null, Validators.required],
       type:     [null, Validators.required],
-      employee_id: [null, Validators.required]
+      employee_id: [null, Validators.required],
+      manual_time: ['00:00:00'],
+
+      
       // {
       //   "employee_id": 0,
       //   "from_time": "1990-05-25T05:05:05",
@@ -481,7 +335,9 @@ exData=[
     });
   }
 
-
+  get t() {
+    return this.timeStampForm.controls;
+    }
 
 
 
@@ -524,5 +380,16 @@ exData=[
       this.employeeForm.controls.ref_id.setValue(this.employee.ref_id)
       this.employeeForm.controls.valid.setValue(this.employee.valid)
 
+    }
+
+
+    getTimeSheetData(){
+      this.timeSheetService.getShifts().subscribe(result => {
+        this.sourceTimesheets = new LocalDataSource(result.filter(elt => elt.type == 't' && elt.valid == 1)); 
+        this.sourceSlickNotes = new LocalDataSource(result.filter(elt => elt.type == 's' && elt.valid == 1)); 
+        this.sourceHoliDays = new LocalDataSource(result.filter(elt => elt.type == 'h' && elt.valid == 1)); 
+      }
+      )
+     
     }
 }
