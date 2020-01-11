@@ -79,13 +79,12 @@ export class ShiftsComponent implements OnInit {
       types: [null],
       employee: [null, Validators.required]
     })
-    this.shiftForm.controls.fromDate.setValue(new Date(631152000*1000)) 
-    this.shiftForm.controls.toDate.setValue(new Date())       // this.shiftForm = this.fb.group({
-    //   fromDate: ['1990:01:01'],
-    //   toDate: [new Date().toISOString().split('.')[0]],
-    //   types: [null],
-    //   employee: [null, Validators.required]
-    // })
+    this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
+    this.shiftForm.controls.toDate.setValue(new Date())
+    this.shiftForm.controls.types.setValue(['t', 'h', 's'])
+    this.shiftForm.controls.employee.setValue([11, 10, 4])
+
+
     this.employeeServices.getEmployes().subscribe(
       employes => {
         employes = employes.filter(elt => elt.valid === 1)
@@ -101,6 +100,7 @@ export class ShiftsComponent implements OnInit {
       "manual_time_end": "23:59:59",
       "manual_time_start": "01:00:00",
     }
+
     let params = new URLSearchParams();
     for (let key in data) {
       if (data[key] != null) {
@@ -110,13 +110,12 @@ export class ShiftsComponent implements OnInit {
     }
     this.timesheetService.getShifts(params.toString()).subscribe(
       resp => {
+        this.shiftForm.controls.employee.setValue([this.employes[0].id])
         this.source = new LocalDataSource(resp);
       });
-    this.shiftForm.controls.types.setValue(['t', 'h', 's'])
   }
 
   dataSend(event) {
-    debugger
     if (this.shiftForm.invalid) {
       return;
     }
@@ -155,12 +154,8 @@ export class ShiftsComponent implements OnInit {
 
       }
     }
-
-    console.log(params.toString() + '&manual_time_end=23:59:59&manual_time_start=01:00:00')
-    console.log(data)
     this.loadData(params.toString().split('%3B').join(';') + '&manual_time_end=23:59:59&manual_time_start=01:00:00')
   }
-
 
   transformDate(date: string): any {
     return this.datePipe.transform(date, 'yyyy-MM-dd');
@@ -175,4 +170,3 @@ export class ShiftsComponent implements OnInit {
   }
 }
 
-// https://thyme-dev.stamp-me.com/api/v2_noauth/employees/get_shifts?from_time_start=1990-01-01T00:00:00&to_time_end=2020-01-11T00:00:00&type=t;s;h&emp_ids=11&to_time_start=1990-01-01T00:00:00&from_time_end=2020-01-11T00:00:00&manual_time_end=23:59:59&manual_time_start=01:00:00
