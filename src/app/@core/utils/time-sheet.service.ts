@@ -23,6 +23,12 @@ export class TimeSheetService {
   constructor(private http: HttpClient) { }
 
 
+  public insertData(timeSheet : ITimeSheet) : Observable<any>{
+    let requestBody = JSON.stringify(timeSheet);
+    return this.http.post(this.getApiPath('timesheets'),requestBody,this.getHttpHeaders())
+      .pipe(map(res => res));
+  }
+
   public getTimeSheets(): Observable<ITimeSheet[]> {
     return this.http.get(this.timeSheetsUrl)
       .pipe(map(res => this.mapProductsFromApi(res)));
@@ -31,7 +37,14 @@ export class TimeSheetService {
     return this.http.get(this.getApiPath('employees/get_shifts?'+url))
       .pipe(map(res => this.mapProductsFromApi(res['timesheets'].content)));
   }
-  
+  public updateData(timeSheet : ITimeSheet) : Observable<any>{
+    return this.http.put(this.getApiPath('timesheets/'+timeSheet.id), timeSheet ,{headers: this.getThymeApiHeaders()})
+      .pipe(map(res => res));
+  }
+
+  public deleteData(id: String) {
+    return this.http.delete(this.getApiPath('timesheets/'+id))
+  }  
 
   public stampIn(password: string): Observable<any> {
     return this.http.post(this.stampInUrl + password, {}, this.getHttpHeaders())

@@ -8,6 +8,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ITimeSheet } from '../../@core/interfaces/itime-sheet';
 import { TimeSheetService } from '../../@core/utils/time-sheet.service';
 import { EmployesService } from '../../@core/utils/employes.service';
+import { SnackbarService } from '../../services/snake-bar.service';
 
 @Component({
   selector: 'ngx-shifts',
@@ -23,7 +24,7 @@ export class ShiftsComponent implements OnInit {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: false,
+      confirmCreate: true,
 
     },
     edit: {
@@ -37,13 +38,13 @@ export class ShiftsComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'id',
-        type: 'string',
-        show: false,
-        editable: false,
-        filter: true,
-      },
+      // id: {
+      //   title: 'id',
+      //   type: 'string',
+      //   show: false,
+      //   editable: false,
+      //   filter: true,
+      // },
       from_time: {
         title: 'From',
         type: 'string',
@@ -60,6 +61,10 @@ export class ShiftsComponent implements OnInit {
         title: 'Note',
         type: 'string',
       },
+      manual_time: {
+        title: 'Manual Time',
+        type: 'string',
+      },
     },
   };
 
@@ -67,8 +72,12 @@ export class ShiftsComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   employes: any
 
-  constructor(private fb: FormBuilder, private datePipe: DatePipe, private timesheetService: TimeSheetService, private employeeServices: EmployesService,
-    private router: Router) {
+  constructor(private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private timesheetService: TimeSheetService,
+    private employeeServices: EmployesService,
+    private router: Router,
+    private snakebar: SnackbarService) {
     this.timeSheets = [];
   }
 
@@ -82,13 +91,14 @@ export class ShiftsComponent implements OnInit {
     this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
     this.shiftForm.controls.toDate.setValue(new Date())
     this.shiftForm.controls.types.setValue(['t', 'h', 's'])
-    this.shiftForm.controls.employee.setValue([11, 10, 4])
 
 
     this.employeeServices.getEmployes().subscribe(
       employes => {
         employes = employes.filter(elt => elt.valid === 1)
+        this.shiftForm.controls.employee.setValue([3])
         this.employes = employes;
+
       });
     const data = {
       "from_time_start": "1990-01-01T00:00:00",
@@ -108,14 +118,16 @@ export class ShiftsComponent implements OnInit {
 
       }
     }
-    this.timesheetService.getShifts(params.toString()).subscribe(
-      resp => {
-        this.shiftForm.controls.employee.setValue([this.employes[0].id])
-        this.source = new LocalDataSource(resp);
-      });
+    this.loadData(params.toString())
   }
 
+
+  get shift() {
+    return this.shiftForm.controls;
+    }
+
   dataSend(event) {
+
     if (this.shiftForm.invalid) {
       return;
     }
@@ -167,6 +179,42 @@ export class ShiftsComponent implements OnInit {
       resp => {
         this.source = new LocalDataSource(resp);
       });
+  }
+
+  onCreateConfirm(event): void {
+    console.log('create');
+    let timesheet: ITimeSheet = <ITimeSheet>{};
+    timesheet = event.newData
+    this.timesheetService.insertData(timesheet).subscribe(
+      result => {
+        this.snakebar.SuccessSnackBar('Succefully Added TimeSheet !!')
+        event.confirm.resolve(event.newData);
+      });
+  }
+
+  onEditConfirm(event) {
+    console.log('edit');
+    let timesheet: ITimeSheet = <ITimeSheet>{};
+    timesheet = event.newData
+    this.timesheetService.updateData(timesheet).subscribe(
+      result => {
+        this.snakebar.SuccessSnackBar('Succefully Edit TimeSheet !!')
+        event.confirm.resolve(event.newData);
+      });
+  }
+
+
+
+  onDeleteConfirm(event) {
+    if (window.confirm('Are you sure you want to delete?')) {
+      this.timesheetService.deleteData(event.newData.id).subscribe(
+        result => {
+          this.snakebar.SuccessSnackBar('Succefully Delete TimeSheet !!')
+          event.confirm.resolve();
+        });
+    } else {
+      event.confirm.reject();
+    }
   }
 }
 

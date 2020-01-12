@@ -38,7 +38,6 @@
                         <label class="label">Employee</label>
                         <nb-select class="form-select" fullWidth  multiple formControlName="employee" name="employee" (ngModelChange)="dataSend($event)">
                             <nb-option [value]="emp.id" *ngFor="let emp of employes">{{  emp.name  }}</nb-option>
-                          
                         </nb-select>
                     </div>
 
@@ -47,8 +46,6 @@
                 [source]="source"
                 [ngClass]="hideCols"
                 (deleteConfirm)="onDeleteConfirm($event)"
-                (userRowSelect)="onUserRowSelect($event)" 
-                (createConfirm)="onCreateConfirm($event)"
                 (editConfirm)="onEditConfirm($event)">
 </ng2-smart-table>
             </nb-card-body>

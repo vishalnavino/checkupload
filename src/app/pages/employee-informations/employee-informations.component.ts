@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ThymeConstants } from '../../@core/utils/thyme-constants';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SnackbarService } from '../../services/snake-bar.service';
+import { ITimeSheet } from '../../@core/interfaces/itime-sheet';
 
 @Component({
   selector: 'ngx-employee-informations',
@@ -56,12 +57,13 @@ export class EmployeeInformationsComponent implements OnInit {
 
     },
   };
+ 
   timesheetSetting = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: false,
+      confirmCreate: true,
 
     },
     edit: {
@@ -79,15 +81,19 @@ export class EmployeeInformationsComponent implements OnInit {
       //   title: 'id',
       //   type: 'string',
       //   show: false,
-      //   editable:false,
+      //   editable: false,
       //   filter: true,
       // },
       from_time: {
-        title: 'From Time',
+        title: 'From',
         type: 'string',
       },
       to_time: {
-        title: 'To Time',
+        title: 'To',
+        type: 'string',
+      },
+      type: {
+        title: 'Type',
         type: 'string',
       },
       note: {
@@ -143,8 +149,24 @@ exData=[
       this.getEmployee(params.id);
       
     });
+    const data = {
+      "from_time_start": "1990-01-01T00:00:00",
+      "to_time_end": new Date(2524590000*1000).toISOString().split('.')[0],
+      "types": "t;h;s",
+      "emp_ids": this.empId,
+      "to_time_start": "1990-01-01T00:00:00",
+      "from_time_end": new Date(2524590000*1000).toISOString().split('.')[0],
+      "manual_time_end": "23:59:59",
+      "manual_time_start": "01:00:00",
+    }
+    let params = new URLSearchParams();
+    for (let key in data) {
+      if (data[key] != null) {
+        params.set(key, data[key])
 
-    this.getTimeSheetData()
+      }
+    }
+    this.getTimeSheetData(params.toString())
 
  
 
@@ -234,7 +256,6 @@ exData=[
   }
 
   public onSubmit() {
- debugger
     // if(this.timeStampForm.invalid){
     //   return ;
     // }
@@ -296,7 +317,10 @@ exData=[
         this.employeeForm.disable();
         response.status == 'success' ? this.router.navigate(['/pages/employee/' + this.employee.id])
           : this.formError = "error";
-      });
+        },
+        error=>{
+          this.snakebar.FailureError(error.error.message)
+        });
   }
 
   editEmployee() {
@@ -318,20 +342,6 @@ exData=[
       type:     [null, Validators.required],
       employee_id: [null, Validators.required],
       manual_time: ['00:00:00'],
-
-      
-      // {
-      //   "employee_id": 0,
-      //   "from_time": "1990-05-25T05:05:05",
-      //   "id": 0,
-      //   "manual_time": "05:05:05",
-      //   "note": "string",
-      //   "ref_id": 0,
-      //   "to_time": "1990-05-20T05:05:05",
-      //   "ts": "1990-05-21T05:05:05",
-      //   "type": "string",
-      //   "valid": 0
-      // }
     });
   }
 
@@ -366,7 +376,6 @@ exData=[
     setDataForm(){
       this.employeeForm.controls.id.setValue(this.employee.id)
       this.timeStampForm.controls.employee_id.setValue(this.employee.id)
-
       this.employeeForm.controls.name.setValue(this.employee.name)
       this.employeeForm.controls.password.setValue(this.employee.password)
       this.employeeForm.controls.descr.setValue(this.employee.descr)
@@ -383,13 +392,60 @@ exData=[
     }
 
 
-    getTimeSheetData(){
-      this.timeSheetService.getShifts().subscribe(result => {
+    getTimeSheetData(data?:any){
+      this.timeSheetService.getShifts(data).subscribe(result => {
         this.sourceTimesheets = new LocalDataSource(result.filter(elt => elt.type == 't' && elt.valid == 1)); 
         this.sourceSlickNotes = new LocalDataSource(result.filter(elt => elt.type == 's' && elt.valid == 1)); 
         this.sourceHoliDays = new LocalDataSource(result.filter(elt => elt.type == 'h' && elt.valid == 1)); 
+      })     
+    }
+
+
+
+
+    // timesheet row select crud
+    onCreateConfirm(event): void {
+      console.log('create');
+      let timesheet: ITimeSheet = <ITimeSheet>{};
+      timesheet = event.newData
+      this.timeSheetService.insertData(timesheet).subscribe(
+        result => {
+          this.snakebar.SuccessSnackBar('Succefully Added TimeSheet !!')
+          event.confirm.resolve(event.newData);
+        },
+        error=>{
+          this.snakebar.FailureError(error.error.message)
+        });
+    }
+  
+    onEditConfirm(event) {
+      console.log('edit');
+      let timesheet: ITimeSheet = <ITimeSheet>{};
+      timesheet = event.newData
+      this.timeSheetService.updateData(timesheet).subscribe(
+        result => {
+          this.snakebar.SuccessSnackBar('Succefully Edit TimeSheet !!')
+          event.confirm.resolve(event.newData);
+        },
+        error=>{
+          this.snakebar.FailureError(error.error.message)
+        });
+    }
+  
+  
+  
+    onDeleteConfirm(event) {
+      if (window.confirm('Are you sure you want to delete?')) {
+        this.timeSheetService.deleteData(event.newData.id).subscribe(
+          result => {
+            this.snakebar.SuccessSnackBar('Succefully Delete TimeSheet !!')
+            event.confirm.resolve();
+          },
+          error=>{
+            this.snakebar.FailureError(error.error.message)
+          });
+      } else {
+        event.confirm.reject();
       }
-      )
-     
     }
 }

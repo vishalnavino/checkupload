@@ -163,7 +163,7 @@
               <nb-list class="user-activity-list">
               </nb-list>
               <ng2-smart-table [settings]="timesheetSetting" [source]="sourceTimesheets" [ngClass]="hideCols"
-                (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                (deleteConfirm)="onDeleteConfirm($event)"
                 (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
               </ng2-smart-table>
             </nb-tab>
@@ -175,41 +175,10 @@
                   (click)="switchViewsTo('sickNoteForm')">Add Sick Note</button>
               </div>
               <ng2-smart-table [settings]="timesheetSetting" [source]="sourceSlickNotes" [ngClass]="hideCols"
-                (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                (deleteConfirm)="onDeleteConfirm($event)"
                 (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
               </ng2-smart-table>
-              <nb-list class="user-activity-list">
-                <!-- <nb-list-item *ngFor="let item of filterTimeSheets('s')">
-                            <div class="visited-date">
-                              <div class="caption">Start</div>
-                              {{ item.from_time | date:'medium' }}
-                            </div>
-                            
-                            <div class="visited-date">
-                              <div class="caption">End</div>
-                              {{ item.to_time  | date:'medium' }}
-                            </div>
-                            
-                            <div class="visited-pages-count">
-                              <div class="caption">Nb Hours</div>
-                              <div class="value">{{ item.manual_time  }}</div>
-                            </div>
-                            
-                            <div class="visited-pages-count">
-                              <div class="caption"></div>
-                              <div class="value">{{ item.note }}</div>
-                            </div>
-                            
-                              <div class="visited-percentages">
-                                <div class="caption">New visits, %</div>
-                                <div class="delta value" [class.up]="item.deltaUp" [class.down]="!item.deltaUp">
-                                  <nb-icon [icon]="item.deltaUp ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
-                                  {{ item.newVisits }}%
-                                </div>
-                              </div>
-                            
-                            </nb-list-item> -->
-              </nb-list>
+          
             </nb-tab>
             <!-- **************** End Sick Notes Tab ****************-->
             <!-- **************** Holidays Tab ****************-->
@@ -219,41 +188,10 @@
                   (click)="switchViewsTo('holidayForm')">Add Holiday</button>
               </div>
               <ng2-smart-table [settings]="timesheetSetting" [source]="sourceHoliDays" [ngClass]="hideCols"
-                (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                (deleteConfirm)="onDeleteConfirm($event)"
                 (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
               </ng2-smart-table>
-              <nb-list class="user-activity-list">
-                <!-- <nb-list-item *ngFor="let item of filterTimeSheets('h')">
-                            <div class="visited-date">
-                              <div class="caption">Start</div>
-                              {{ item.from_time | date:'medium' }}
-                            </div>
-                            
-                            <div class="visited-date">
-                              <div class="caption">End</div>
-                              {{ item.to_time  | date:'medium' }}
-                            </div>
-                            
-                            <div class="visited-pages-count">
-                              <div class="caption">Nb Hours</div>
-                              <div class="value">{{ item.manual_time  }}</div>
-                            </div>
-                            
-                            <div class="visited-pages-count">
-                              <div class="caption"></div>
-                              <div class="value">{{ item.note }}</div>
-                            </div>
-                            
-                              <div class="visited-percentages">
-                                <div class="caption">New visits, %</div>
-                                <div class="delta value" [class.up]="item.deltaUp" [class.down]="!item.deltaUp">
-                                  <nb-icon [icon]="item.deltaUp ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
-                                  {{ item.newVisits }}%
-                                </div>
-                              </div>
-                            
-                            </nb-list-item> -->
-              </nb-list>
+             
             </nb-tab>
             <!-- **************** End Holidays Tab ****************-->
           </nb-tabset>

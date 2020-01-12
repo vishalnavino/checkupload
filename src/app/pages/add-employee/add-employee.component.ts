@@ -26,10 +26,11 @@ export class AddEmployeeComponent implements OnInit {
       result => {
         this.snakebar.SuccessSnackBar('Employee Added Succefully')
         this.router.navigate(['pages/employee'])
-      },
-      error=>{
-        this.snakebar.SuccessSnackBar('Error')
-      });
+      
+    },
+    error=>{
+      this.snakebar.FailureError(error.error.message)
+    });
   }
 
   initForm() {
