@@ -17,7 +17,7 @@ export class EmployesService {
   updateEmployeeUrl :string = ThymeConstants.HOST + '/employees/update';
   insertEmployeeUrl :string = ThymeConstants.HOST + '/employees/insert';
   constructor(private http: HttpClient) { }
-  public getEmployes(): Observable<Employee[]> {
+  public getEmployes(){
     return this.http.get(this.getApiPath('employees/readall'),{headers: this.getThymeApiHeaders()}).pipe(map(res => this.mapEmployesFromApi(res)));
   }
 
@@ -125,5 +125,6 @@ export class EmployesService {
   getApiPath(path){
     return this.apiUrl+''+path;
   }
+
 }
  

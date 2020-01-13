@@ -10,13 +10,13 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { EmployesComponent } from './employes/employes.component';
 import { EmployesTableComponent } from './tables/employes-table/employes-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { EmployeeInformationsComponent } from './employee-informations/employee-informations.component';
+import { EmployeeInformationsComponent, ApprovedContentDialogComponent, DeleteDialogComponent } from './employee-informations/employee-informations.component';
 import { FormsModule as ngFormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from './forms/forms.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { SettingsComponent } from './settings/settings.component';
-import {MatSnackBarModule} from '@angular/material';
+import {MatSnackBarModule, MatDialogModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -38,7 +38,9 @@ import {MatSnackBarModule} from '@angular/material';
     FormsModule,
     NbSelectModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+
   ],
   declarations: [
     PagesComponent,
@@ -48,7 +50,10 @@ import {MatSnackBarModule} from '@angular/material';
     AddEmployeeComponent,
     ShiftsComponent,
     SettingsComponent,
+    ApprovedContentDialogComponent,
+    DeleteDialogComponent
   ],
+  entryComponents: [ApprovedContentDialogComponent,DeleteDialogComponent]
 })
 export class PagesModule {
 }

@@ -9,6 +9,7 @@ import { ITimeSheet } from '../../@core/interfaces/itime-sheet';
 import { TimeSheetService } from '../../@core/utils/time-sheet.service';
 import { EmployesService } from '../../@core/utils/employes.service';
 import { SnackbarService } from '../../services/snake-bar.service';
+import { ExportCsvService } from '../../services/export-csv.service';
 
 @Component({
   selector: 'ngx-shifts',
@@ -77,29 +78,28 @@ export class ShiftsComponent implements OnInit {
     private timesheetService: TimeSheetService,
     private employeeServices: EmployesService,
     private router: Router,
-    private snakebar: SnackbarService) {
+    private snakebar: SnackbarService,
+    private csvExportService: ExportCsvService) {
     this.timeSheets = [];
   }
 
   ngOnInit() {
+    this.employeeServices.getEmployes().subscribe(
+      employes => {
+        employes = employes.filter(elt => elt.valid === 1)
+        this.employes = employes;
+
+      });
     this.shiftForm = this.fb.group({
       fromDate: [null],
       toDate: [null],
       types: [null],
       employee: [null, Validators.required]
     })
-    this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
-    this.shiftForm.controls.toDate.setValue(new Date())
-    this.shiftForm.controls.types.setValue(['t', 'h', 's'])
 
 
-    this.employeeServices.getEmployes().subscribe(
-      employes => {
-        employes = employes.filter(elt => elt.valid === 1)
-        this.shiftForm.controls.employee.setValue([3])
-        this.employes = employes;
 
-      });
+
     const data = {
       "from_time_start": "1990-01-01T00:00:00",
       "to_time_end": new Date().toISOString().split('.')[0],
@@ -119,6 +119,16 @@ export class ShiftsComponent implements OnInit {
       }
     }
     this.loadData(params.toString())
+
+    this.setFormValue()
+  }
+
+  setFormValue(){
+    this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
+    this.shiftForm.controls.toDate.setValue(new Date())
+    this.shiftForm.controls.types.setValue(['t', 'h', 's'])
+    this.shiftForm.controls.employee.setValue([11])
+
   }
 
 
@@ -177,6 +187,7 @@ export class ShiftsComponent implements OnInit {
   loadData(url) {
     this.timesheetService.getShifts(url).subscribe(
       resp => {
+        this.timeSheets = resp;
         this.source = new LocalDataSource(resp);
       });
   }
@@ -215,6 +226,12 @@ export class ShiftsComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+
+
+  // export csv File
+  downloadCSV(){
+    this.csvExportService.downloadFile(this.timeSheets, 'shift');
   }
 }
 
