@@ -33,7 +33,7 @@ export class EmployesTableComponent implements OnInit {
     columns: {
       id: {
         title: 'id',
-        type: 'string',
+        type: 'number',
         show: false,
         editable:false,
         filter: true,

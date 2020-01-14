@@ -1,7 +1,7 @@
 import { ITimeSheet } from './itime-sheet';
 
 export interface Employee {
-    id: string;
+    id: number;
     name: string;
     password: string;
     descr: string;

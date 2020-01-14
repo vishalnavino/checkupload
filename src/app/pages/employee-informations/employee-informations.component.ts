@@ -175,7 +175,7 @@ export class EmployeeInformationsComponent implements OnInit {
     this.actifTab = ThymeConstants.TIME_SHEETS_VIEW;
   }
 
-  getEmployee(id: string) {
+  getEmployee(id: number) {
     this.employeeService.getEmployee(id).subscribe(employee => {
       this.employee = employee;
       if (this.employee.valid === 0) {

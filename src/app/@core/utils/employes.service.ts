@@ -21,7 +21,7 @@ export class EmployesService {
     return this.http.get(this.getApiPath('employees/readall'),{headers: this.getThymeApiHeaders()}).pipe(map(res => this.mapEmployesFromApi(res)));
   }
 
-  public getEmployee(id: String): Observable<Employee> {
+  public getEmployee(id: number): Observable<Employee> {
     return this.http.get(this.getApiPath('employees/'+id)).pipe(map(res => this.mapEmployeeFromApi(res)));
   }
   public updateEmployee(employee : Employee) : Observable<any>{

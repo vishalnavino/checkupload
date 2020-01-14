@@ -5,7 +5,7 @@
             <nb-card-body>
                 <form class="form-inline" [formGroup]="shiftForm">
                     <div class="form-group  ">
-                        <label class="label label-main">From</label>
+                            <label class="label label-main">From</label>
                         <div>
                             <label class="label">Date</label>
                             <input nbInput matInput formControlName="fromDate" placeholder="From Date"
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="label-main">To</label>
+                            <label class="label-main">To</label>
                         <div>
                             <label class="label">Date</label>
                             <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To Date"
@@ -50,13 +50,18 @@
                         <label class="label">Employee</label>
                         <nb-select class="form-select" fullWidth multiple formControlName="employee" name="employee"
                             (ngModelChange)="dataSend($event)">
-                            <nb-option class="filter-option">
-                                <button class="btn btn-primary" (click)="selectAll('all')">
-                                    Select All
-                                </button>
-                                <button class="btn btn-danger" (click)="deselectAll('deselect')">
-                                    Deselect All
-                                </button>
+                            <nb-option 
+                            class="filter-option">
+                              <button 
+                              class="btn btn-primary" 
+                                (click)="selectAll('all')">
+                                Select All
+                              </button>
+                              <button 
+                              class="btn btn-danger"
+                                (click)="deselectAll('deselect')">
+                                Deselect All
+                              </button>
                             </nb-option>
                             <nb-option [value]="emp.id" *ngFor="let emp of employes">{{  emp.name  }}</nb-option>
                         </nb-select>

@@ -92,11 +92,10 @@ export class ShiftsComponent implements OnInit {
 
   deselectAll(select) {
     
-    this.shiftForm.controls.types.setValue([])
+    this.shiftForm.controls.employee.setValue([])
     this.dataSend()
   }
   ngOnInit() {
-    debugger
     this.employeeServices.getEmployes().subscribe(
       employes => {
         employes = employes.filter(elt => elt.valid === 1)
@@ -107,7 +106,7 @@ export class ShiftsComponent implements OnInit {
       fromDate: [null],
       toDate: [null],
       types: [null],
-      employee: [null, Validators.required]
+      employee: [null]
     })
 
 
@@ -138,7 +137,7 @@ export class ShiftsComponent implements OnInit {
     this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
     this.shiftForm.controls.toDate.setValue(new Date())
     this.shiftForm.controls.types.setValue(['t', 'h', 's'])
-    this.shiftForm.controls.employee.setValue([11])
+    this.shiftForm.controls.employee.setValue([11,13])
 
   }
 
