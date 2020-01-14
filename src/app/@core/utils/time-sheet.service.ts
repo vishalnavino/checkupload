@@ -35,7 +35,7 @@ export class TimeSheetService {
   }
   public getShifts(url?:string): Observable<ITimeSheet[]> {
     return this.http.get(this.getApiPath('employees/get_shifts?'+url))
-      .pipe(map(res => this.mapProductsFromApi(res['timesheets'].content)));
+      .pipe(map(res => this.mapProductsFromApi(res['timesheets']['content'])));
   }
   public updateData(timeSheet : ITimeSheet) : Observable<any>{
     return this.http.put(this.getApiPath('timesheets/'+timeSheet.id), timeSheet ,{headers: this.getThymeApiHeaders()})

@@ -18,8 +18,8 @@ import { ExportCsvService } from '../../services/export-csv.service';
 })
 export class ShiftsComponent implements OnInit {
   shiftForm: FormGroup;
-  fromTime: string;
-  toTime: string;
+  fromTime: string = '00:00:00';
+  toTime: string ='23:59:00';
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -72,7 +72,7 @@ export class ShiftsComponent implements OnInit {
   public timeSheets: ITimeSheet[];
   source: LocalDataSource = new LocalDataSource();
   employes: any
-
+  empArray=[]
   constructor(private fb: FormBuilder,
     private datePipe: DatePipe,
     private timesheetService: TimeSheetService,
@@ -82,8 +82,21 @@ export class ShiftsComponent implements OnInit {
     private csvExportService: ExportCsvService) {
     this.timeSheets = [];
   }
+ selectAll(select) {
+  this.employes.forEach(element => {
+    this.empArray.push(element.id)
+  });
+  this.shiftForm.controls.employee.setValue(this.empArray)
+  this.empArray=[]
+}
 
+  deselectAll(select) {
+    
+    this.shiftForm.controls.types.setValue([])
+    this.dataSend()
+  }
   ngOnInit() {
+    debugger
     this.employeeServices.getEmployes().subscribe(
       employes => {
         employes = employes.filter(elt => elt.valid === 1)
@@ -96,8 +109,6 @@ export class ShiftsComponent implements OnInit {
       types: [null],
       employee: [null, Validators.required]
     })
-
-
 
 
     const data = {
@@ -136,13 +147,13 @@ export class ShiftsComponent implements OnInit {
     return this.shiftForm.controls;
     }
 
-  dataSend(event) {
-
+  dataSend(event?:any) {
+    
     if (this.shiftForm.invalid) {
       return;
     }
     const data = {}
-    if (this.fromTime === undefined) {
+    if (this.fromTime === '00:00:00') {
       data['from_time_start'] = this.transformDate(this.shiftForm.value['fromDate']) + "T" + "00:00:00"
     } else {
       if (this.fromTime !== '') {
@@ -150,7 +161,7 @@ export class ShiftsComponent implements OnInit {
       }
     }
 
-    if (this.toTime === undefined) {
+    if (this.toTime === '23:59:00') {
       data['to_time_end'] = this.transformDate(this.shiftForm.value['toDate']) + "T" + "00:00:00"
     } else {
       if (this.toTime !== '') {

@@ -2,7 +2,7 @@
   <nb-card-header>Edit Employee</nb-card-header>
   <div class="card-body">
       <div class="row">
-          <div class=" card col-sm-8">
+          <div class=" col-sm-8">
               <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
                   <div class="row">
                     <div class="col-sm-6">
@@ -122,7 +122,6 @@
   </div>
 </div>
 <!-- card.// -->
-<nb-card>
   <!--
        <nb-card-header>
          <button *ngIf="stampedIn" type="button" class="btn btn-danger col-12" status="primary"
@@ -136,7 +135,7 @@
     <div class="row">
       <hr />
       <div class="col-12">
-        <nb-card size="small">
+        <nb-card size="medium">
           <nb-tabset fullWidth>
             <!-- **************** TimeSheets Tab ****************-->
             <nb-tab tabTitle="TimeStamps" active="{{actifTab == 'timeSheetsView'}}">
@@ -355,4 +354,3 @@
       </div>
     </form>
   </nb-card-body>
-</nb-card>
