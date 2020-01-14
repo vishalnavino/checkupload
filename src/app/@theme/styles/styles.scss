@@ -54,3 +54,9 @@ th.ng2-smart-actions.ng-star-inserted {
 .label-main{
   justify-content: right!important;
 }
+
+
+// display none inline add button so dont create timeshhet and employee inline add button 
+a.ng2-smart-action.ng2-smart-action-add-add.ng-star-inserted{
+  display: none;
+}
