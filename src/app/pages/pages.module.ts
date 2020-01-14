@@ -8,7 +8,7 @@ import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { EmployesComponent } from './employes/employes.component';
-import { EmployesTableComponent } from './tables/employes-table/employes-table.component';
+import { EmployesTableComponent, DeleteEmployeeComponent } from './tables/employes-table/employes-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { EmployeeInformationsComponent, ApprovedContentDialogComponent, DeleteDialogComponent } from './employee-informations/employee-informations.component';
 import { FormsModule as ngFormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -51,9 +51,14 @@ import {MatSnackBarModule, MatDialogModule} from '@angular/material';
     ShiftsComponent,
     SettingsComponent,
     ApprovedContentDialogComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    DeleteEmployeeComponent
   ],
-  entryComponents: [ApprovedContentDialogComponent,DeleteDialogComponent]
+  entryComponents: [
+    ApprovedContentDialogComponent,
+    DeleteDialogComponent,
+    DeleteEmployeeComponent
+  ]
 })
 export class PagesModule {
 }
