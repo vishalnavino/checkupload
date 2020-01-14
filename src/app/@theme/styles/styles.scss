@@ -35,3 +35,14 @@
 .nb-theme-default ng2-smart-table tbody tr:hover {
   cursor: pointer
 };
+
+.id{
+  width: 100px;
+
+}
+th.ng2-smart-actions.ng-star-inserted {
+  width: 100px;
+}
+.type ,.gross_salary_month,.contract_hours_month{
+  width: 200px;
+}
