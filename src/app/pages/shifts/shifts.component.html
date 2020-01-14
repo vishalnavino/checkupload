@@ -5,29 +5,38 @@
             <nb-card-body>
                 <form class="form-inline" [formGroup]="shiftForm">
                     <div class="form-group  ">
-                        <label for="inputfrom">From</label>
-                        <input nbInput matInput formControlName="fromDate" placeholder="From Date"
-                            (ngModelChange)="dataSend($event)" [nbDatepicker]="formpicker">
-                        <nb-datepicker #formpicker></nb-datepicker>
+                            <label class="label label-main">From</label>
+                        <div>
+                            <label class="label">Date</label>
+                            <input nbInput matInput formControlName="fromDate" placeholder="From Date"
+                                (ngModelChange)="dataSend($event)" [nbDatepicker]="formpicker">
+                            <nb-datepicker #formpicker></nb-datepicker>
+
+                        </div>
+                        <div>
+                            <label class="label">Time</label>
+                            <input matInput type="time" [(ngModel)]="fromTime" (ngModelChange)="dataSend($event)"
+                                class="form-control time-form" id="from-time" name="from-time"
+                                [ngModelOptions]="{standalone: true}" />
+                        </div>
                     </div>
-                    <div class="form-group form-time">
-                        <input matInput type="time" [(ngModel)]="fromTime" (ngModelChange)="dataSend($event)"
-                            class="form-control" id="from-time" name="from-time"
-                            [ngModelOptions]="{standalone: true}" />
+                    <div class="form-group">
+                            <label class="label-main">To</label>
+                        <div>
+                            <label class="label">Date</label>
+                            <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To Date"
+                                (ngModelChange)="dataSend($event)" [nbDatepicker]="topicker">
+                            <nb-datepicker #topicker></nb-datepicker>
+                        </div>
+                        <div>
+                            <label class="label">Time</label>
+                            <input matInput type="time" class="form-control time-form" [(ngModel)]="toTime"
+                                (ngModelChange)="dataSend($event)" id="to-time" name="to-time"
+                                [ngModelOptions]="{standalone: true}" />
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputto">To</label>
-                        <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To Date"
-                            (ngModelChange)="dataSend($event)" [nbDatepicker]="topicker">
-                        <nb-datepicker #topicker></nb-datepicker>
-                    </div>
-                    <div class="form-group form-time">
-                        <input matInput type="time" class="form-control" [(ngModel)]="toTime"
-                            (ngModelChange)="dataSend($event)" id="to-time" name="to-time"
-                            [ngModelOptions]="{standalone: true}" />
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group mg-20">
                         <label class="label">Type</label>
                         <nb-select class="form-select" fullWidth multiple formControlName="types" name="types"
                             (ngModelChange)="dataSend($event)">
@@ -37,7 +46,7 @@
 
                         </nb-select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mg-20">
                         <label class="label">Employee</label>
                         <nb-select class="form-select" fullWidth multiple formControlName="employee" name="employee"
                             (ngModelChange)="dataSend($event)">
