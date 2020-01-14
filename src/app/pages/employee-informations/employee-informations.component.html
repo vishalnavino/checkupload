@@ -1,140 +1,124 @@
 <div class="card">
   <nb-card-header>Edit Employee</nb-card-header>
   <div class="card-body">
-    <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
       <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">First Name</label>
-            <input type="text" nbInput fullWidth formControlName="name" placeholder="Name" (keyup)="changeField($event,'name')">
-            <div class="form-error" *ngIf="( b.name.dirty || b.name.touched ) && b.name.invalid && b.name.errors">
-              Name is Required
+          <div class="col-sm-8">
+              <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">First Name</label>
+                        <input type="text" nbInput fullWidth formControlName="name" placeholder="Name" (keyup)="changeField($event,'name')">
+                        <div class="form-error" *ngIf="( b.name.dirty || b.name.touched ) && b.name.invalid && b.name.errors">
+                          Name is Required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Pin</label>
+                        <input type="text" nbInput fullWidth formControlName="password" placeholder="Pin" (keyup)="changeField($event,'password')">
+                        <div class="form-error"
+                          *ngIf="( b.password.dirty || b.password.touched ) && b.password.invalid && b.password.errors">
+                          Pin is Required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Description</label>
+                        <textarea type="text" nbInput fullWidth formControlName="descr" placeholder="Description" (keyup)="changeField($event,'descr')"></textarea>
+                        <div class="form-error" *ngIf="( b.descr.dirty || b.descr.touched ) && b.descr.invalid && b.descr.errors">
+                          Description is Required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Gross Salary Month</label>
+                        <input type="text" nbInput fullWidth formControlName="gross_salary_month" placeholder="Gross Salary Month" (keyup)="changeField($event,'gross_salary_month')">
+                        <div class="form-error"
+                          *ngIf="( b.gross_salary_month.dirty || b.gross_salary_month.touched ) && b.gross_salary_month.invalid && b.gross_salary_month.errors">
+                          Gross Salary Month is Required
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="label">Health Insurance Share</label>
+                        <input type="number" nbInput fullWidth formControlName="health_insurance_share" (keyup)="changeField($event,'health_insurance_share')"
+                          placeholder="Health Insurance Share">
+                        <div class="form-error"
+                          *ngIf="( b.health_insurance_share.dirty || b.health_insurance_share.touched ) && b.health_insurance_share.invalid && b.health_insurance_share.errors">
+                          Health Insurance Share is Required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Type</label>
+                        <input type="text" nbInput fullWidth formControlName="type" placeholder="Type" (keyup)="changeField($event,'type')">
+                        <div class="form-error" *ngIf="( b.type.dirty || b.type.touched ) && b.type.invalid && b.type.errors">
+                          Type is Required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Working Contract</label>
+                        <input type="text" nbInput fullWidth formControlName="working_contract" placeholder="Working Contract" (keyup)="changeField($event,'working_contract')">
+                        <div class="form-error"
+                          *ngIf="( b.working_contract.dirty || b.working_contract.touched ) && b.working_contract.invalid && b.working_contract.errors">
+                          Working Contract is Required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Contract Hours Month</label>
+                        <input type="number" nbInput fullWidth formControlName="contract_hours_month" (keyup)="changeField($event,'contract_hours_month')"
+                          placeholder="Contract Hours Month">
+                        <div class="form-error"
+                          *ngIf="( b.contract_hours_month.dirty || b.contract_hours_month.touched ) && b.contract_hours_month.invalid && b.contract_hours_month.errors">
+                          Contract Hours Month is Required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Limit Hours Month</label>
+                        <input type="text" nbInput fullWidth formControlName="limit_hours_month" placeholder="Limit Hours Month" (keyup)="changeField($event,'limit_hours_month')">
+                        <div class="form-error"
+                          *ngIf="( b.limit_hours_month.dirty || b.limit_hours_month.touched ) && b.limit_hours_month.invalid && b.limit_hours_month.errors">
+                          Limit Hours Month is Required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+         
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="label">Surcharge</label>
+                        <input type="number" nbInput fullWidth formControlName="surcharge" placeholder="Surcharge" (keyup)="changeField($event,'surcharge')">
+                        <div class="form-error"
+                          *ngIf="( b.surcharge.dirty || b.surcharge.touched ) && b.surcharge.invalid && b.surcharge.errors">
+                          Surcharge is Required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="action-button">
+                    <button type="submit" nbButton>Update</button>
+                    <a nbButton class="delete-button" (click)="openDeleteDialog(empId)">Delete</a>
+                  </div>
+                </form>
             </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Pin</label>
-            <input type="text" nbInput fullWidth formControlName="password" placeholder="Pin" (keyup)="changeField($event,'password')">
-            <div class="form-error"
-              *ngIf="( b.password.dirty || b.password.touched ) && b.password.invalid && b.password.errors">
-              Pin is Required
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Description</label>
-            <textarea type="text" nbInput fullWidth formControlName="descr" placeholder="Description" (keyup)="changeField($event,'descr')"></textarea>
-            <div class="form-error" *ngIf="( b.descr.dirty || b.descr.touched ) && b.descr.invalid && b.descr.errors">
-              Description is Required
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Gross Salary Month</label>
-            <input type="text" nbInput fullWidth formControlName="gross_salary_month" placeholder="Gross Salary Month" (keyup)="changeField($event,'gross_salary_month')">
-            <div class="form-error"
-              *ngIf="( b.gross_salary_month.dirty || b.gross_salary_month.touched ) && b.gross_salary_month.invalid && b.gross_salary_month.errors">
-              Gross Salary Month is Required
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="label">Health Insurance Share</label>
-            <input type="number" nbInput fullWidth formControlName="health_insurance_share" (keyup)="changeField($event,'health_insurance_share')"
-              placeholder="Health Insurance Share">
-            <div class="form-error"
-              *ngIf="( b.health_insurance_share.dirty || b.health_insurance_share.touched ) && b.health_insurance_share.invalid && b.health_insurance_share.errors">
-              Health Insurance Share is Required
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Type</label>
-            <input type="text" nbInput fullWidth formControlName="type" placeholder="Type" (keyup)="changeField($event,'type')">
-            <div class="form-error" *ngIf="( b.type.dirty || b.type.touched ) && b.type.invalid && b.type.errors">
-              Type is Required
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Working Contract</label>
-            <input type="text" nbInput fullWidth formControlName="working_contract" placeholder="Working Contract" (keyup)="changeField($event,'working_contract')">
-            <div class="form-error"
-              *ngIf="( b.working_contract.dirty || b.working_contract.touched ) && b.working_contract.invalid && b.working_contract.errors">
-              Working Contract is Required
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Contract Hours Month</label>
-            <input type="number" nbInput fullWidth formControlName="contract_hours_month" (keyup)="changeField($event,'contract_hours_month')"
-              placeholder="Contract Hours Month">
-            <div class="form-error"
-              *ngIf="( b.contract_hours_month.dirty || b.contract_hours_month.touched ) && b.contract_hours_month.invalid && b.contract_hours_month.errors">
-              Contract Hours Month is Required
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Limit Hours Month</label>
-            <input type="text" nbInput fullWidth formControlName="limit_hours_month" placeholder="Limit Hours Month" (keyup)="changeField($event,'limit_hours_month')">
-            <div class="form-error"
-              *ngIf="( b.limit_hours_month.dirty || b.limit_hours_month.touched ) && b.limit_hours_month.invalid && b.limit_hours_month.errors">
-              Limit Hours Month is Required
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="label">Ref Id</label>
-              <input type="number" nbInput fullWidth formControlName="ref_id" placeholder="Ref Id">
-              <div class="form-error"
-                *ngIf="( b.ref_id.dirty || b.ref_id.touched ) && b.ref_id.invalid && b.ref_id.errors">
-                Ref Id is Required
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="label">valid</label>
-              <input type="number" nbInput fullWidth formControlName="valid" placeholder="valid">
-              <div class="form-error" *ngIf="( b.valid.dirty || b.valid.touched ) && b.valid.invalid && b.valid.errors">
-                valid is Required
-              </div>
-            </div>
-          </div>
-          </div> -->
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label class="label">Surcharge</label>
-            <input type="number" nbInput fullWidth formControlName="surcharge" placeholder="Surcharge" (keyup)="changeField($event,'surcharge')">
-            <div class="form-error"
-              *ngIf="( b.surcharge.dirty || b.surcharge.touched ) && b.surcharge.invalid && b.surcharge.errors">
-              Surcharge is Required
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="action-button">
-        <button type="submit" nbButton>Update</button>
-        <a nbButton class="delete-button" (click)="openDeleteDialog(empId)">Delete</a>
-      </div>
-    </form>
+  
   </div>
 </div>
 <!-- card.// -->
