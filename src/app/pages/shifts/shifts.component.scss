@@ -23,4 +23,18 @@ nb-checkbox {
   nb-card.inline-form-card nb-card-body {
     padding-bottom: 0;
   }
-  
+  .mat-back-option{
+    background-color: #f7f9fc;
+    border-color: #edf1f7;
+    border-style: solid;
+    border-width: 1px;
+    color: #192038;
+    padding: 10px;
+  }
+
+  .mat-select-panel{
+    background-color: #ffffff!important;
+    max-height: 20rem!important;
+    height: 100%!important;
+    overflow: auto!important;
+  }

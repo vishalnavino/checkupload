@@ -73,16 +73,7 @@ export class ShiftsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shiftForm = this.fb.group({
-      fromDate: [null],
-      toDate: [null],
-      types: [null],
-      employee: [null, Validators.required]
-    })
-    this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
-    this.shiftForm.controls.toDate.setValue(new Date())
-    this.shiftForm.controls.types.setValue(['t', 'h', 's'])
-    this.shiftForm.controls.employee.setValue([11, 10, 4])
+ 
 
 
     this.employeeServices.getEmployes().subscribe(
@@ -90,6 +81,17 @@ export class ShiftsComponent implements OnInit {
         employes = employes.filter(elt => elt.valid === 1)
         this.employes = employes;
       });
+
+      this.shiftForm = this.fb.group({
+        fromDate: [null],
+        toDate: [null],
+        types: [null],
+        employee: [null, Validators.required]
+      })
+      this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
+      this.shiftForm.controls.toDate.setValue(new Date())
+      this.shiftForm.controls.types.setValue(['t', 'h', 's'])
+      this.shiftForm.controls.employee.setValue([11, 10, 4])
     const data = {
       "from_time_start": "1990-01-01T00:00:00",
       "to_time_end": new Date().toISOString().split('.')[0],
@@ -110,7 +112,7 @@ export class ShiftsComponent implements OnInit {
     }
     this.timesheetService.getShifts(params.toString()).subscribe(
       resp => {
-        this.shiftForm.controls.employee.setValue([this.employes[0].id])
+        this.shiftForm.controls.employee.setValue([11])
         this.source = new LocalDataSource(resp);
       });
   }
