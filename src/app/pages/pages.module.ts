@@ -16,7 +16,7 @@ import { FormsModule } from './forms/forms.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { SettingsComponent } from './settings/settings.component';
-import {MatSnackBarModule, MatDialogModule} from '@angular/material';
+import {MatSnackBarModule, MatSelectModule, MatDialogModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -41,6 +41,7 @@ import {MatSnackBarModule, MatDialogModule} from '@angular/material';
     ReactiveFormsModule,
     MatDialogModule,
 
+    MatSelectModule
   ],
   declarations: [
     PagesComponent,

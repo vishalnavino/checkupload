@@ -96,20 +96,25 @@ export class ShiftsComponent implements OnInit {
     this.dataSend()
   }
   ngOnInit() {
+ 
+
+
     this.employeeServices.getEmployes().subscribe(
       employes => {
         employes = employes.filter(elt => elt.valid === 1)
         this.employes = employes;
-
       });
-    this.shiftForm = this.fb.group({
-      fromDate: [null],
-      toDate: [null],
-      types: [null],
-      employee: [null]
-    })
 
-
+      this.shiftForm = this.fb.group({
+        fromDate: [null],
+        toDate: [null],
+        types: [null],
+        employee: [null, Validators.required]
+      })
+      this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
+      this.shiftForm.controls.toDate.setValue(new Date())
+      this.shiftForm.controls.types.setValue(['t', 'h', 's'])
+      this.shiftForm.controls.employee.setValue([11, 10, 4])
     const data = {
       "from_time_start": "1990-01-01T00:00:00",
       "to_time_end": new Date().toISOString().split('.')[0],
@@ -131,6 +136,7 @@ export class ShiftsComponent implements OnInit {
     this.loadData(params.toString())
 
     this.setFormValue()
+   
   }
 
   setFormValue(){
