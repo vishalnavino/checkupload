@@ -7,6 +7,7 @@ nb-checkbox {
   }
   .form-time{
     margin-top: 20px!important;
+    margin-left: 5px!important;
   }
   
   label{
@@ -23,15 +24,6 @@ nb-checkbox {
   nb-card.inline-form-card nb-card-body {
     padding-bottom: 0;
   }
-  .mg-20{
-    margin-top: 20px!important;
-  }
-
-  .filter-option{
-    justify-content: space-around;
-
-  }
-  
   .mat-back-option{
     background-color: #f7f9fc;
     border-color: #edf1f7;
@@ -39,11 +31,10 @@ nb-checkbox {
     border-width: 1px;
     color: #192038;
     padding: 10px;
+    width: 100%;;
+  }
+  .selection-button{
+    margin: 10px;
   }
 
-  .mat-select-panel{
-    background-color: #ffffff!important;
-    max-height: 20rem!important;
-    height: 100%!important;
-    overflow: auto!important;
-  }
+ 

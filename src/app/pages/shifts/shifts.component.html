@@ -5,68 +5,60 @@
             <nb-card-body>
                 <form class="form-inline" [formGroup]="shiftForm">
                     <div class="form-group  ">
-                        <label for="inputfrom">From</label>
-                        <input nbInput matInput formControlName="fromDate" placeholder="From Date"
-                            (ngModelChange)="dataSend($event)" [nbDatepicker]="formpicker">
-                        <nb-datepicker #formpicker></nb-datepicker>
-                    </div>
-                    <div class="form-group form-time">
-                        <input matInput type="time" [(ngModel)]="fromTime" (ngModelChange)="dataSend($event)"
-                            class="form-control" id="from-time" name="from-time"
-                            [ngModelOptions]="{standalone: true}" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputto">To</label>
-                        <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To Date"
-                            (ngModelChange)="dataSend($event)" [nbDatepicker]="topicker">
-                        <nb-datepicker #topicker></nb-datepicker>
-                    </div>
-                    <div class="form-group form-time">
-                        <input matInput type="time" class="form-control" [(ngModel)]="toTime"
-                            (ngModelChange)="dataSend($event)" id="to-time" name="to-time"
-                            [ngModelOptions]="{standalone: true}" />
-                    </div>
-                    <div class="form-group">
-                            <label class="label-main">To</label>
                         <div>
-                            <label class="label">Date</label>
+                            <label for="inputfrom">From</label>
+                            <input nbInput matInput formControlName="fromDate" placeholder="From Date"
+                                (ngModelChange)="dataSend($event)" [nbDatepicker]="formpicker">
+                            <nb-datepicker #formpicker></nb-datepicker>
+                        </div>
+                        <div class="form-time">
+                            <input matInput type="time" [(ngModel)]="fromTime" (ngModelChange)="dataSend($event)"
+                                class="form-control" id="from-time" name="from-time"
+                                [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                    <div class="form-group  ">
+                        <div>
+                            <label for="inputto">To</label>
                             <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To Date"
                                 (ngModelChange)="dataSend($event)" [nbDatepicker]="topicker">
                             <nb-datepicker #topicker></nb-datepicker>
                         </div>
-                        <div>
-                            <label class="label">Time</label>
-                            <input matInput type="time" class="form-control time-form" [(ngModel)]="toTime"
+                        <div class="form-time">
+                            <input matInput type="time" class="form-control" [(ngModel)]="toTime"
                                 (ngModelChange)="dataSend($event)" id="to-time" name="to-time"
                                 [ngModelOptions]="{standalone: true}" />
                         </div>
                     </div>
 
-                    <div class="form-group mg-20">
+                    <div class="form-group">
                         <label class="label">Type</label>
-                        <nb-select class="form-select" fullWidth multiple formControlName="types" name="types"
-                            (ngModelChange)="dataSend($event)">
-                            <nb-option value="t">Timestamps</nb-option>
-                            <nb-option value="h">Holidays</nb-option>
-                            <nb-option value="s">Sick Notes</nb-option>
 
-                        </nb-select>
+                        <mat-form-field class="mat-back-option">
+                            <mat-select formControlName="types" multiple fullWidth (ngModelChange)="dataSend($event)">
+                                <mat-option value="t">Timestamps</mat-option>
+                                <mat-option value="h">Holidays</mat-option>
+                                <mat-option value="s">Sick Notes</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
-                    <!-- <div class="form-group">
-                        <label class="label">Employee</label>
-                        <nb-select class="form-select" fullWidth  multiple formControlName="employee" name="employee" (ngModelChange)="dataSend($event)">
-                            <nb-option [attr.value]="emp.id" [value]="emp.id" *ngFor="let emp of employes">{{  emp.name  }}</nb-option>
-                          
-                        </nb-select>
-                    </div> -->
+
                     <div class="form-group ">
                         <label class="label">Employee</label>
                         <mat-form-field class="mat-back-option">
-                            <mat-select formControlName="employee" multiple fullWidth>
-                              <mat-option *ngFor="let emp of employes" [value]="emp.id">{{  emp.name  }}</mat-option>
+                            <mat-select formControlName="employee" multiple fullWidth class="mat-select"
+                                (ngModelChange)="dataSend($event)">
+                                <div class="selection-button">
+                                    <button class="btn btn-primary" (click)="selectAll('all')">
+                                        Select All
+                                    </button>
+                                    <button class="btn btn-danger" (click)="deselectAll('deselect')">
+                                        Deselect All
+                                    </button>
+                                </div>
+                                <mat-option *ngFor="let emp of employes" [value]="emp.id">{{  emp.name  }}</mat-option>
                             </mat-select>
-                          </mat-form-field>
+                        </mat-form-field>
                     </div>
                 </form>
                 <ng2-smart-table [settings]="settings" [source]="source" [ngClass]="hideCols"
@@ -74,12 +66,6 @@
                     (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
                 </ng2-smart-table>
             </nb-card-body>
-            <nb-card-footer>
-                <button *ngIf="timeSheets.length > 0 " class="btn btn-primary col-3" (click)="downloadCSV()">
-                    Export CSV
-                </button>
-            </nb-card-footer>
-
         </nb-card>
     </div>
 </div>
