@@ -1,12 +1,10 @@
-
-
 <div class="row">
   <div class="col-md-12 col-lg-6 col-xxxl-4">
     <nb-card>
       <nb-card-header>Working Hour Per Period</nb-card-header>
-      <nb-card-body>
-          <div echarts [options]="options" class="echart"></div>
-        
+      <nb-card-body class="minHeight">
+        <div echarts [options]="options" class="echart"></div>
+
       </nb-card-body>
     </nb-card>
   </div>
@@ -14,7 +12,7 @@
   <div class="col-md-12 col-lg-6 col-xxxl-5">
     <nb-card>
       <nb-card-header>Working Hour Per Type</nb-card-header>
-      <nb-card-body>
+      <nb-card-body class="minHeight mgTop">
         <chart type="pie" [data]="data" [options]="options"></chart>
 
       </nb-card-body>
@@ -24,8 +22,122 @@
   <div class="col-md-12 col-lg-6 col-xxxl-3">
     <nb-card>
       <nb-card-header>Currently Working</nb-card-header>
-      <nb-card-body>
-    
+      <nb-card-body class="minHeight">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Name </th>
+                      <th>Time </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+                   
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+             
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+                
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+               
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+         
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+      
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+       
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+                   
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+             
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+                
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+               
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+         
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+      
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+       
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+                   
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+             
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+                
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+               
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+         
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+      
+                  </tr>
+                  <tr>
+                      <td>James</td>
+                      <td>5h 36min</td>
+       
+                  </tr>
+              </tbody>
+          </table>
       </nb-card-body>
     </nb-card>
   </div>
@@ -35,20 +147,16 @@
   <nb-card-header>
     Employes List
   </nb-card-header>
-    <nb-card-body>
-    <ng2-smart-table [settings]="settings" 
-                     [source]="source"
-                     [ngClass]="hideCols"
-                     (deleteConfirm)="openDeleteDialog($event)"
-                      
-                     (createConfirm)="onCreateConfirm($event)"
-                     (editConfirm)="onUserRowSelect($event)">
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" [ngClass]="hideCols"
+      (deleteConfirm)="openDeleteDialog($event)" (createConfirm)="onCreateConfirm($event)"
+      (editConfirm)="onUserRowSelect($event)">
     </ng2-smart-table>
   </nb-card-body>
 
   <nb-card-footer>
     <div class="add-button">
-        <a routerLink="add" class="ng2-smart-action ng2-smart-action-add-add"><i class="nb-plus"></i></a>
+      <a routerLink="add" class="ng2-smart-action ng2-smart-action-add-add"><i class="nb-plus"></i></a>
     </div>
-</nb-card-footer>
+  </nb-card-footer>
 </nb-card>
