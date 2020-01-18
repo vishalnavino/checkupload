@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { EmployesService } from '../../../@core/utils/employes.service';
 import { Employee } from '../../../@core/interfaces/employe';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { SnackbarService } from '../../../services/snake-bar.service';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-employes-table',
   templateUrl: './employes-table.component.html',
   styleUrls: ['./employes-table.component.scss']
 })
-export class EmployesTableComponent implements OnInit {
+export class EmployesTableComponent implements OnInit,OnDestroy {
+  data: any;
+  options: any;
+  themeSubscription: any;
+
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -61,9 +66,47 @@ export class EmployesTableComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor( private employesService: EmployesService,  private snakebar: SnackbarService,
+    private theme: NbThemeService,
     private dialog: MatDialog,
     private router: Router) {
     this.employes = [];
+
+    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+
+      const colors: any = config.variables;
+      const chartjs: any = config.variables.chartjs;
+
+      this.data = {
+        labels: ['Download Sales', 'In-Store Sales', 'Mail Sales'],
+        datasets: [{
+          data: [300, 500, 100],
+          backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight],
+        }],
+      };
+
+      this.options = {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+          xAxes: [
+            {
+              display: false,
+            },
+          ],
+          yAxes: [
+            {
+              display: false,
+            },
+          ],
+        },
+        legend: {
+          labels: {
+            fontColor: chartjs.textColor,
+          },
+        },
+      };
+    });
+    console.log(this.themeSubscription)
   }
 
   public ngOnInit(): void {
@@ -142,6 +185,11 @@ export class EmployesTableComponent implements OnInit {
     employee.gross_salary_month = event.newData.gross_salary_month;
     employee.contract_hours_month = event.newData.contract_hours_month;
   }
+
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
+
 }
 
 

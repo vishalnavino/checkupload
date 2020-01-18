@@ -17,7 +17,9 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { SettingsComponent } from './settings/settings.component';
 import {MatSnackBarModule, MatSelectModule, MatDialogModule} from '@angular/material';
-
+import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartModule } from 'angular2-chartjs';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -41,7 +43,10 @@ import {MatSnackBarModule, MatSelectModule, MatDialogModule} from '@angular/mate
     ReactiveFormsModule,
     MatDialogModule,
 
-    MatSelectModule
+    MatSelectModule,
+    NgxEchartsModule,
+    NgxChartsModule,
+    ChartModule,
   ],
   declarations: [
     PagesComponent,
