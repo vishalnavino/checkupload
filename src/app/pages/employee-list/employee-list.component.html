@@ -7,10 +7,7 @@
     <nb-card-body>
       <ng2-smart-table [settings]="settings" 
                        [source]="source"
-                       [ngClass]="hideCols"
-                       (deleteConfirm)="onDeleteConfirm($event)"
                        (userRowSelect)="onUserRowSelect($event)" 
-                       (createConfirm)="onCreateConfirm($event)"
                        (editConfirm)="onEditConfirm($event)">
       </ng2-smart-table>
     </nb-card-body>

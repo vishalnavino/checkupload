@@ -61,8 +61,8 @@
                         </mat-form-field>
                     </div>
                 </form>
-                <ng2-smart-table [settings]="settings" [source]="source" [ngClass]="hideCols"
-                    (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="onUserRowSelect($event)"
+                <ng2-smart-table [settings]="settings" [source]="source"
+                    (deleteConfirm)="onDeleteConfirm($event)" 
                     (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
                 </ng2-smart-table>
             </nb-card-body>
