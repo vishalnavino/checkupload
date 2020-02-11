@@ -5,5 +5,5 @@
  */
 export const environment = {
   production: false,
-  apiUrl:'https://thyme-dev.stamp-me.com/api/v2_noauth/',
+  apiUrl:'https://thyme-dev.stamp-me.com/api/v2/',
   thymeAPI_KEY: 'debug_key'};

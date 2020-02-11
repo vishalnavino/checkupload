@@ -10,6 +10,9 @@ import { TimeSheetService } from '../../@core/utils/time-sheet.service';
 import { EmployesService } from '../../@core/utils/employes.service';
 import { SnackbarService } from '../../services/snake-bar.service';
 import { ExportCsvService } from '../../services/export-csv.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DeleteEmployeeComponent } from '../tables/employes-table/employes-table.component';
+import { DeleteDialogComponent } from '../employee-informations/employee-informations.component';
 
 @Component({
   selector: 'ngx-shifts',
@@ -39,13 +42,11 @@ export class ShiftsComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      // id: {
-      //   title: 'id',
-      //   type: 'string',
-      //   show: false,
-      //   editable: false,
-      //   filter: true,
-      // },
+       id: {
+         title: 'id',
+         type: 'string',
+         editable: false,
+       },
       from_time: {
         title: 'From',
         type: 'string',
@@ -74,6 +75,7 @@ export class ShiftsComponent implements OnInit {
   employes: any
   empArray=[]
   constructor(private fb: FormBuilder,
+    private dialog: MatDialog,
     private datePipe: DatePipe,
     private timesheetService: TimeSheetService,
     private employeeServices: EmployesService,
@@ -96,15 +98,6 @@ export class ShiftsComponent implements OnInit {
     this.dataSend()
   }
   ngOnInit() {
- 
-
-
-    this.employeeServices.getEmployes().subscribe(
-      employes => {
-        employes = employes.filter(elt => elt.valid === 1)
-        this.employes = employes;
-      });
-
       this.shiftForm = this.fb.group({
         fromDate: [null],
         toDate: [null],
@@ -114,12 +107,12 @@ export class ShiftsComponent implements OnInit {
       this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
       this.shiftForm.controls.toDate.setValue(new Date())
       this.shiftForm.controls.types.setValue(['t', 'h', 's'])
-      this.shiftForm.controls.employee.setValue([11, 10, 4])
+      //this.shiftForm.controls.employee.setValue([11, 10, 4])
     const data = {
       "from_time_start": "1990-01-01T00:00:00",
       "to_time_end": new Date().toISOString().split('.')[0],
       "types": "t;h;s",
-      "emp_ids": 11,
+      "emp_ids":"1",
       "to_time_start": "1990-01-01T00:00:00",
       "from_time_end": new Date().toISOString().split('.')[0],
       "manual_time_end": "23:59:59",
@@ -134,9 +127,7 @@ export class ShiftsComponent implements OnInit {
       }
     }
     this.loadData(params.toString())
-
     this.setFormValue()
-   
   }
 
   setFormValue(){
@@ -178,11 +169,12 @@ export class ShiftsComponent implements OnInit {
       data['types'] = this.shiftForm.value['types'].join(";")
 
     }
-
+    console.log('teeeeest'+this.shiftForm.value['employee'])
+/*
     if (this.shiftForm.value['employee'] != null) {
       data['emp_ids'] = this.shiftForm.value['employee'].join(";")
-
     }
+    */
     data['to_time_start'] = data['from_time_start']
     data['from_time_end'] = data['to_time_end']
     let params = new URLSearchParams();
@@ -219,12 +211,45 @@ export class ShiftsComponent implements OnInit {
       });
   }
 
+  onUserRowSelect(event): void {
+    console.log(event.data)
+    this.router.navigate(['./pages/shifts/' + event.data.id]);
+  }
+
+    // delete PopUp
+    openDeleteDialog(event) {
+      this.dialog.open(DeleteShiftComponent, {
+        disableClose: false,
+        width: '500px',
+      }).afterClosed().subscribe(result => {
+        console.log('resu'+result);
+        if (result === 'Yes') {
+          this.deleteShiftClick(event.data.id);
+          event.confirm.resolve()
+        } else {
+          event.confirm.reject()
+        }
+      });
+    }
+
+      // delete Employee
+   deleteShiftClick(id: string) {
+    this.timesheetService.deleteData(id).subscribe(
+      result => {
+        this.snakebar.SuccessSnackBar('Succefully Delete Shift')
+      }, error => {
+        this.snakebar.SuccessSnackBar('Internal Server error' + error.error.message)
+      })
+  }
+
+
   onEditConfirm(event) {
     console.log('edit');
     let timesheet: ITimeSheet = <ITimeSheet>{};
     timesheet = event.newData
     this.timesheetService.updateData(timesheet).subscribe(
       result => {
+        console.log('result'+result)
         this.snakebar.SuccessSnackBar('Succefully Edit TimeSheet !!')
         event.confirm.resolve(event.newData);
       });
@@ -251,3 +276,18 @@ export class ShiftsComponent implements OnInit {
   }
 }
 
+@Component({
+  selector: 'vex-components-delete-content',
+  templateUrl: './popup/delete-shift.component.html'
+})
+export class DeleteShiftComponent {
+  // icClose = icClose;
+  changeField: string;
+  constructor(private dialogRef: MatDialogRef<DeleteShiftComponent>) {
+
+  }
+
+  close(answer: string) {
+    this.dialogRef.close(answer);
+  }
+}

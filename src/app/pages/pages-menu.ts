@@ -23,6 +23,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'lock-outline',
     link: '/pages/settings',
   },
+  {
+    title: 'Stats',
+    icon: 'lock-outline',
+    link: '/pages/stats',
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,

@@ -1,0 +1,13 @@
+
+    <nb-card>
+        <nb-card-header>Are you sure </nb-card-header>
+        <nb-card-body>
+            You want to delete this Shift ? 
+        </nb-card-body>
+        <nb-card-footer>
+          <button nbButton  status="danger" (click)="close('No')" style="margin-right:10px;">Close</button>
+          <button nbButton  color="primary" (click)="close('Yes')">Delete</button>
+
+        </nb-card-footer>
+      </nb-card>
+      

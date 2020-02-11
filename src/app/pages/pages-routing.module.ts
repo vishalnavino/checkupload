@@ -10,6 +10,8 @@ import { EmployeeInformationsComponent } from './employee-informations/employee-
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ShiftsComponent } from './shifts/shifts.component';
+import { EditShiftComponent } from './edit-shift/edit-shift.component';
+import { ThymeChartsComponent } from './thyme-charts/thyme-charts.component';
 
 const routes: Routes = [{
   path: '',
@@ -34,6 +36,14 @@ const routes: Routes = [{
     {
       path: 'shifts',
       component: ShiftsComponent,
+    },
+    {
+      path: 'stats',
+      component: ThymeChartsComponent,
+    },
+    {
+      path: 'shifts/:id',
+      component: EditShiftComponent,
     },
     {
       path: 'settings',
@@ -95,7 +105,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'employee',
       pathMatch: 'full',
     },
     {

@@ -5,14 +5,13 @@ import { Employee } from '../../../@core/interfaces/employe';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { SnackbarService } from '../../../services/snake-bar.service';
-import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-employes-table',
   templateUrl: './employes-table.component.html',
   styleUrls: ['./employes-table.component.scss']
 })
-export class EmployesTableComponent implements OnInit, OnDestroy,AfterViewInit {
+export class EmployesTableComponent implements OnInit {
   data: any;
   options: any;
   themeSubscription: any;
@@ -66,47 +65,9 @@ export class EmployesTableComponent implements OnInit, OnDestroy,AfterViewInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private employesService: EmployesService, private snakebar: SnackbarService,
-    private theme: NbThemeService,
     private dialog: MatDialog,
     private router: Router) {
     this.employes = [];
-
-    // Pie chart classes
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
-      const colors: any = config.variables;
-      const chartjs: any = config.variables.chartjs;
-
-      this.data = {
-        labels: ['Download Sales', 'In-Store Sales', 'Mail Sales'],
-        datasets: [{
-          data: [300, 500, 100],
-          backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight],
-        }],
-      };
-
-      this.options = {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          xAxes: [
-            {
-              display: false,
-            },
-          ],
-          yAxes: [
-            {
-              display: false,
-            },
-          ],
-        },
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
-          },
-        },
-      };
-    });
   }
 
   public ngOnInit(): void {
@@ -118,77 +79,6 @@ export class EmployesTableComponent implements OnInit, OnDestroy,AfterViewInit {
       });
   }
 
-  ngAfterViewInit() {
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
-      const colors: any = config.variables;
-      const echarts: any = config.variables.echarts;
-
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [colors.primaryLight],
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow',
-          },
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            splitLine: {
-              lineStyle: {
-                color: echarts.splitLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        series: [
-          {
-            name: 'Score',
-            type: 'bar',
-            barWidth: '60%',
-            data: [10, 52, 200, 334, 390, 330, 220],
-          },
-        ],
-      };
-    });
-  }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
@@ -255,10 +145,6 @@ export class EmployesTableComponent implements OnInit, OnDestroy,AfterViewInit {
     employee.name = event.newData.name;
     employee.gross_salary_month = event.newData.gross_salary_month;
     employee.contract_hours_month = event.newData.contract_hours_month;
-  }
-
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
   }
 
 }

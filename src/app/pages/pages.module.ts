@@ -14,12 +14,14 @@ import { EmployeeInformationsComponent, ApprovedContentDialogComponent, DeleteDi
 import { FormsModule as ngFormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from './forms/forms.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { ShiftsComponent } from './shifts/shifts.component';
+import { ShiftsComponent, DeleteShiftComponent } from './shifts/shifts.component';
 import { SettingsComponent } from './settings/settings.component';
 import {MatSnackBarModule, MatSelectModule, MatDialogModule} from '@angular/material';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartModule } from 'angular2-chartjs';
+import { EditShiftComponent } from './edit-shift/edit-shift.component';
+import { ThymeChartsComponent } from './thyme-charts/thyme-charts.component';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -53,17 +55,20 @@ import { ChartModule } from 'angular2-chartjs';
     EmployesComponent,
     EmployesTableComponent,
     EmployeeInformationsComponent,
+    ApprovedContentDialogComponent,
+    DeleteDialogComponent,
+    DeleteShiftComponent,
     AddEmployeeComponent,
     ShiftsComponent,
     SettingsComponent,
-    ApprovedContentDialogComponent,
-    DeleteDialogComponent,
-    DeleteEmployeeComponent
+    DeleteEmployeeComponent,
+    EditShiftComponent,
+    ThymeChartsComponent
   ],
   entryComponents: [
+    DeleteEmployeeComponent,
     ApprovedContentDialogComponent,
-    DeleteDialogComponent,
-    DeleteEmployeeComponent
+    DeleteShiftComponent
   ]
 })
 export class PagesModule {

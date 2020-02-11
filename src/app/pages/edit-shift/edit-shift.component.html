@@ -1,0 +1,62 @@
+<div class="card">
+        <nb-card-header>Edit Sift</nb-card-header>
+        <nb-card-body >
+          <form [formGroup]="shiftForm" (ngSubmit)="editShift()">
+            <div class="form-row">
+              <div class="form-group  col-12">
+                <input type="hidden" formControlName="type" formControlName="type">
+              </div>
+              <div class="form-group  col-3">
+                <label for="inputfrom">From</label>
+                <input class="form-control" nbInput matInput formControlName="from_date" placeholder="From"
+                  [nbDatepicker]="formpicker"
+                   (keyup)="changeField($event,'from_date')">
+                <nb-datepicker #formpicker></nb-datepicker>
+                <div class="form-error"
+                  *ngIf="( t.from_date.dirty || t.from_date.touched ) && t.from_date.invalid && t.from_date.errors">
+                  From Date is Required
+                </div>
+              </div>
+              <div class="form-group  col-3">
+                <label for="inputfrom">From Time</label>
+                <input  name="from_time" type="time" formControlName="from_time" class="form-control" id="from-time"
+                  name="from-time" 
+                  (keyup)="changeField($event,'from_time')"/>
+              </div>
+              <div class="form-group  col-3">
+                <label for="inputto">To</label>
+                <input class="form-control" nbInput matInput name="to_date" formControlName="to_date" placeholder="To"
+                  [nbDatepicker]="topicker"
+                  (keyup)="changeField($event,'to_date')">
+                <nb-datepicker #topicker></nb-datepicker>
+              </div>
+              <div class="form-group  col-3">
+                <label for="inputfrom">To Time</label>
+                <input matInput name="to_time" type="time" formControlName="to_time" class="form-control" id="to-time"
+                  name="to-time" 
+                  (keyup)="changeField($event,'to_time')"/>
+              </div>
+              <div class="form-group col-3">
+                <label for="exampleFormControlTextarea1">Manual Time</label>
+                <input matInput name="manual_time" type="time" formControlName="manual_time" class="form-control" id="to-time"
+                  name="from-time" 
+                  (keyup)="changeField($event,'manual_time')"/>
+              </div>
+              <div class="form-group col-12">
+                <label for="exampleFormControlTextarea1">Note</label>
+                <textarea matInput name="note" formControlName="note" class="form-control" id="exampleFormControlTextarea1"
+                  rows="3"
+                  (keyup)="changeField($event,'note')"></textarea>
+                <div class="form-error" *ngIf="( t.note.dirty || t.note.touched ) && t.note.invalid && t.note.errors">
+                  Note is Required
+                </div>
+              </div>
+              <div class="form-group col-12 text-right">
+                <button id="submitbutton" name="submitbutton" class="btn btn-primary col-3">
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
+        </nb-card-body>
+      

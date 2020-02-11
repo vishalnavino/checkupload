@@ -191,15 +191,11 @@ export class EmployeeInformationsComponent implements OnInit {
 
   // Submit data employee add form
   addEmployee() {
-    if (this.employeeForm.invalid) {
-      return;
-    }
     if (this.changesFields.length > 0) {
       this.openApprovedDialog()
     }else{
       this.aprovedContent()
     }
-
   }
 
 
@@ -255,19 +251,25 @@ export class EmployeeInformationsComponent implements OnInit {
       this.timeStampForm.controls.manual_time.setValue(this.timeStampForm.value.manual_time + ':00')
     }
     // this.switchViewsTo('timeSheetsView')
-    let password = this.employee.password;
+    let password = this.employee.id;
     let type = this.timeStampForm.value.type;
     let note = this.timeStampForm.value.note;
-    let from_date;
-    let to_date;
-    ({ from_date, to_date } = this.processTimeStampFormByType(type, from_date, this.timeStampForm.value, to_date));
-    this.submitTimeStampForm(type, password, from_date, to_date, note);
+    let manual_time = this.timeStampForm.value.manual_time;
+    let from_date = this.transformDate(this.timeStampForm.value.from_date) + "T" + this.timeStampForm.value.from_time + ":00";
+    let to_date = this.transformDate(this.timeStampForm.value.to_date) + "T" + this.timeStampForm.value.to_time + ":00";
+    this.submitTimeStampForm(type, password, from_date, to_date,manual_time, note);
   }
 
-  private submitTimeStampForm(type: any, password: string, from_date: any, to_date: any, note: any) {
-    this.timeStampForm.controls.type.setValue(type)
+  private submitTimeStampForm(type: any, id: number, from_date: any, to_date: any,manual_time :any, note: any) {
+    const timeSheet = new ITimeSheet(id,type,from_date,to_date,manual_time,note);
+    timeSheet.bit_attributes = 0;
+    timeSheet.keywords = "a,b,c";
+    timeSheet.location = "Production Site";
+    timeSheet.name="Normal Shift";
+    timeSheet.recurring=0;
 
-    this.timeSheetService.saveTimeSheet(this.timeStampForm.value).subscribe(response => {
+    this.timeStampForm.controls.type.setValue(type)
+    this.timeSheetService.saveTimeSheet(timeSheet).subscribe(response => {
       this.snakebar.SuccessSnackBar('Timesheet added succefully')
       this.actifTab = 'timeSheetsView'
       this.getTimeSheetData()
@@ -385,7 +387,7 @@ export class EmployeeInformationsComponent implements OnInit {
 
 
   getTimeSheetData(data?: any) {
-    this.timeSheetService.getShifts(data).subscribe(result => {
+      this.timeSheetService.getShifts(data).subscribe(result => {
       this.sourceTimesheets = new LocalDataSource(result.filter(elt => elt.type == 't' && elt.valid == 1));
       this.sourceSlickNotes = new LocalDataSource(result.filter(elt => elt.type == 's' && elt.valid == 1));
       this.sourceHoliDays = new LocalDataSource(result.filter(elt => elt.type == 'h' && elt.valid == 1));

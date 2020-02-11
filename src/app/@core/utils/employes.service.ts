@@ -49,8 +49,9 @@ export class EmployesService {
   
   private getThymeApiHeaders(): HttpHeaders {
     let  header: HttpHeaders = new HttpHeaders();
-    header = header.set("Content-Type", "application/json");
+    header = header.set("Access-Control-Allow-Origin", "*");
     header = header.append("thyme_api_token", ThymeConstants.API_KEY);
+    header = header.append("thyme_tenant_id", ThymeConstants.API_TENANT_ID);
     return header;
   }
 
@@ -74,7 +75,6 @@ export class EmployesService {
     //   timeSheets.push(timeSheet);
     // }
     employee.timeSheets = timeSheets;
-    console.log(employee)
     return employee;
   }
 
@@ -94,7 +94,7 @@ export class EmployesService {
     employee.contract_hours_month = responseItem.contract_hours_month;
     employee.limit_hours_month = responseItem.limit_hours_month;
     employee.ref_id = responseItem.ref_id;
-    employee.valid = responseItem.valid;
+    employee.valid = responseItem.state;
 
     employee.password = responseItem.password;
 

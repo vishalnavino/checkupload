@@ -34,8 +34,13 @@ export class TimeSheetService {
       .pipe(map(res => this.mapProductsFromApi(res)));
   }
   public getShifts(url?:string): Observable<ITimeSheet[]> {
-    return this.http.get(this.getApiPath('employees/get_shifts?'+url))
-      .pipe(map(res => this.mapProductsFromApi(res['timesheets']['content'])));
+    return this.http.get(this.getApiPath('timesheets/readall'))
+      .pipe(map(res => this.mapProductsFromApi(res)));
+  }
+
+  public getShift(id : number) : Observable<ITimeSheet>{
+    return this.http.get(this.getApiPath('timesheets/'+id))
+    .pipe(map(res  => this.mapShistFromAPI(res)));
   }
   public updateData(timeSheet : ITimeSheet) : Observable<any>{
     return this.http.put(this.getApiPath('timesheets/'+timeSheet.id), timeSheet ,{headers: this.getThymeApiHeaders()})
@@ -77,6 +82,7 @@ export class TimeSheetService {
 
   private mapProductsFromApi(response: any): ITimeSheet[] {
     const timeSheets: ITimeSheet[] = [];
+    console.log(response)
     for (let i = 0; i < response.length; i++) {
       let employee: ITimeSheet = response[i];
       timeSheets.push(employee);
@@ -84,15 +90,22 @@ export class TimeSheetService {
     return timeSheets;
   }
 
-  private populateTimeSheetInformations(responseItem: any): ITimeSheet {
+  private mapShistFromAPI(responseItem: any): ITimeSheet {
     let timeSheet: ITimeSheet = <ITimeSheet>{};
+    timeSheet.employee_id = responseItem.employee_id;
     timeSheet.from_time = responseItem.from_time;
-    timeSheet.to_time = timeSheet.to_time;
-    timeSheet.type = timeSheet.type;
-    timeSheet.note = timeSheet.note;
+    timeSheet.to_time = responseItem.to_time;
+    console.log('res type'+responseItem.type)
+    timeSheet.type = responseItem.type;
+    timeSheet.note = responseItem.note;
+    timeSheet.hours = responseItem.hours;
+    timeSheet.manual_time = responseItem.manual_time;
+    timeSheet.bit_attributes = responseItem.bit_attributes;
+    timeSheet.keywords = responseItem.keywords;
+    timeSheet.location = responseItem.location;
+    timeSheet.name=responseItem.name;
+    timeSheet.recurring=responseItem.recurring;
 
-    timeSheet.hours = timeSheet.hours;
-    timeSheet
     return timeSheet;
   }
 

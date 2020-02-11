@@ -62,8 +62,10 @@
                     </div>
                 </form>
                 <ng2-smart-table [settings]="settings" [source]="source"
-                    (deleteConfirm)="onDeleteConfirm($event)" 
-                    (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
+                    (createConfirm)="onCreateConfirm($event)" 
+                    (editConfirm)="onEditConfirm($event)"
+                    (userRowSelect)="onUserRowSelect($event)" 
+                    (deleteConfirm)="openDeleteDialog($event)" >
                 </ng2-smart-table>
             </nb-card-body>
         </nb-card>

@@ -1,7 +1,8 @@
 export class ThymeConstants {
-    public static HOST: string = "http://localhost:8080/";
+    public static HOST: string = "http://thyme-dev.stamp-me.com/api-2.0.0/";
     public static API_KEY = "debug_key"
-
+    public static API_TENANT_ID = "8"
+    
     public static TIME_SHEETS_VIEW : string = "timeSheetsView";
     public static HOLIDAYS_VIEW : string = "holidaysView";
     public static SICK_NOTES_VIEW : string = "sickNotesView";
