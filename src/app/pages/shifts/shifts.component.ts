@@ -102,7 +102,7 @@ export class ShiftsComponent implements OnInit {
       fromDate: [null],
       toDate: [null],
       types: [null],
-      employee: [null, Validators.required]
+      employee: [null]
     })
     this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
     this.shiftForm.controls.toDate.setValue(new Date())
@@ -163,12 +163,6 @@ export class ShiftsComponent implements OnInit {
         data['to_time_end'] = this.transformDate(this.shiftForm.value['toDate']) + "T" + this.toTime + ":00"
       }
     }
-
-    /*
-        if (this.shiftForm.value['employee'] != null) {
-          data['emp_ids'] = this.shiftForm.value['employee'].join(";")
-        }
-        */
     data['to_time_start'] = data['from_time_start']
     data['from_time_end'] = data['to_time_end']
     let params = new URLSearchParams();

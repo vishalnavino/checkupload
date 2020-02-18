@@ -12,6 +12,10 @@ import { SettingsComponent } from './settings/settings.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { EditShiftComponent } from './edit-shift/edit-shift.component';
 import { ThymeChartsComponent } from './thyme-charts/thyme-charts.component';
+import { HolidaysComponent } from './holidays/holidays.component';
+import { EditHolidaysComponent } from './holidays/edit-holidays/edit-holidays.component';
+import { SickNotesComponent } from './sick-notes/sick-notes.component';
+import { EditSickNotesComponent } from './sick-notes/edit-sick-notes/edit-sick-notes.component';
 
 const routes: Routes = [{
   path: '',
@@ -36,6 +40,22 @@ const routes: Routes = [{
     {
       path: 'shifts',
       component: ShiftsComponent,
+    },
+    {
+      path: 'holidays',
+      component: HolidaysComponent,
+    },
+    {
+      path: 'holidays/edit/:id',
+      component: EditHolidaysComponent,
+    },
+    {
+      path: 'sick-notes',
+      component: SickNotesComponent,
+    },
+    {
+      path: 'sick-notes/edit/:id',
+      component: EditSickNotesComponent,
     },
     {
       path: 'stats',

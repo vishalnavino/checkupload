@@ -34,7 +34,7 @@ export class TimeSheetService {
       .pipe(map(res => this.mapProductsFromApi(res)));
   }
   public getShifts(url?:string): Observable<ITimeSheet[]> {
-    return this.http.get(this.getApiPath('timesheets/readall'))
+    return this.http.get(this.getApiPath('timesheets/readall?'+url))
       .pipe(map(res => this.mapProductsFromApi(res)));
   }
 

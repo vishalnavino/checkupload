@@ -1,0 +1,53 @@
+<div class="row">
+        <div class="col-md-12">
+           <nb-card class="inline-form-card">
+              <nb-card-header>Sick Notes</nb-card-header>
+              <nb-card-body>
+                 <form class="form-inline" [formGroup]="sickNotesForm">
+                    <div class="form-group  ">
+                       <div>
+                          <label for="inputfrom">From</label>
+                          <input nbInput matInput formControlName="fromDate" placeholder="From Date"
+                          (ngModelChange)="dataSend($event)" [nbDatepicker]="formpicker">
+                          <nb-datepicker #formpicker></nb-datepicker>
+                       </div>
+                    </div>
+                    <div class="form-group ">
+                       <div>
+                          <label for="inputto">To</label>
+                          <input nbInput matInput name="toDate" formControlName="toDate" placeholder="To Date"
+                          (ngModelChange)="dataSend($event)" [nbDatepicker]="topicker">
+                          <nb-datepicker #topicker></nb-datepicker>
+                       </div>
+                    </div>
+                    <div class="form-group ">
+                       <label class="label">Employee</label>
+                       <mat-form-field class="mat-back-option">
+                          <mat-select formControlName="employee" multiple fullWidth class="mat-select"
+                             (ngModelChange)="dataSend($event)">
+                             <div class="selection-button">
+                                <button class="btn btn-primary" (click)="selectAll('all')">
+                                Select All
+                                </button>
+                                <button class="btn btn-danger" (click)="deselectAll('deselect')">
+                                Deselect All
+                                </button>
+                             </div>
+                             <mat-option *ngFor="let emp of employes" [value]="emp.id">{{  emp.name  }}</mat-option>
+                          </mat-select>
+                       </mat-form-field>
+                    </div>
+                 </form>
+                 <ng2-smart-table [settings]="settings" [source]="source"
+                 (createConfirm)="onCreateConfirm($event)" 
+                 (editConfirm)="onEditConfirm($event)"
+                 (userRowSelect)="onUserRowSelect($event)" 
+                 (deleteConfirm)="openDeleteDialog($event)" >
+                 </ng2-smart-table>
+              </nb-card-body>
+              <nb-card-footer *ngIf="timeSheets.length > 0">
+                 <button class="ng2-smart-action ng2-smart-action-add-add" (click)="downloadCSV()"> Export CSV </button>
+              </nb-card-footer>
+           </nb-card>
+        </div>
+     </div>

@@ -13,18 +13,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Shifts',
-    icon: 'home-outline',
+    icon: 'browser-outline',
     link: '/pages/shifts',
   },
   {
     title: 'Holidays',
-    icon: 'home-outline',
-    link: '/pages/shifts',
+    icon: 'keypad-outline',
+    link: '/pages/holidays',
   },
   {
     title: 'Sick Notes',
-    icon: 'home-outline',
-    link: '/pages/shifts',
+    icon: 'edit-2-outline',
+    link: '/pages/sick-notes',
   },
   {
     title: 'Settings',

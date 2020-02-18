@@ -1,0 +1,53 @@
+nb-checkbox {
+    margin-bottom: 1rem;
+  }
+  
+  .form-inline [fullWidth] {
+    flex: 1;
+  }
+  .form-time{
+    margin-top: 20px!important;
+    margin-left: 5px!important;
+  }
+  
+  label{
+      width: 100%;
+  }
+  .form-inline > * {
+    margin: 0 1.5rem 1.5rem 0;
+  }
+
+  .form-select{
+    width: 250px!important;
+  }
+  
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+  .mat-back-option{
+    background-color: #f7f9fc;
+    border-color: #edf1f7;
+    border-style: solid;
+    border-width: 1px;
+    color: #192038;
+    padding: 10px;
+    width: 100%;;
+  }
+  .selection-button{
+    margin: 10px;
+  }
+
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #ff4081;
+}
+button.ng2-smart-action.ng2-smart-action-add-add {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    font-size: 1.00rem !important;
+    padding: 0.375rem 0.5rem;
+    border-color: #3366ff;
+    background-color: #3366ff;
+    color: #ffffff;
+    border-radius: 0.375rem;
+}

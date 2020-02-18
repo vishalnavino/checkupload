@@ -22,6 +22,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartModule } from 'angular2-chartjs';
 import { EditShiftComponent } from './edit-shift/edit-shift.component';
 import { ThymeChartsComponent } from './thyme-charts/thyme-charts.component';
+import { HolidaysComponent } from './holidays/holidays.component';
+import { EditHolidaysComponent } from './holidays/edit-holidays/edit-holidays.component';
+import { SickNotesComponent } from './sick-notes/sick-notes.component';
+import { EditSickNotesComponent } from './sick-notes/edit-sick-notes/edit-sick-notes.component';
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -63,7 +68,13 @@ import { ThymeChartsComponent } from './thyme-charts/thyme-charts.component';
     SettingsComponent,
     DeleteEmployeeComponent,
     EditShiftComponent,
-    ThymeChartsComponent
+    ThymeChartsComponent,
+    HolidaysComponent,
+    EditHolidaysComponent,
+    SickNotesComponent,
+    EditSickNotesComponent,
+    
+
   ],
   entryComponents: [
     DeleteEmployeeComponent,
