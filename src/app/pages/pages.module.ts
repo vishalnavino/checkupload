@@ -16,7 +16,7 @@ import { FormsModule } from './forms/forms.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ShiftsComponent, DeleteShiftComponent } from './shifts/shifts.component';
 import { SettingsComponent } from './settings/settings.component';
-import {MatSnackBarModule, MatSelectModule, MatDialogModule} from '@angular/material';
+import {MatSnackBarModule, MatSelectModule, MatDialogModule, MatSlideToggleModule} from '@angular/material';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartModule } from 'angular2-chartjs';
@@ -44,7 +44,7 @@ import { ThymeChartsComponent } from './thyme-charts/thyme-charts.component';
     MatSnackBarModule,
     ReactiveFormsModule,
     MatDialogModule,
-
+    MatSlideToggleModule,
     MatSelectModule,
     NgxEchartsModule,
     NgxChartsModule,

@@ -349,7 +349,7 @@ export class EmployeeInformationsComponent implements OnInit {
     this.employeeForm = this.formBuilder.group({
       id: [0, Validators.required],
       name: [null, Validators.required],
-      password: [null, Validators.required],
+      password: [null],
       descr: [null, Validators.required],
       gross_salary_month: [null, Validators.required],
       health_insurance_share: [null, Validators.required],

@@ -16,14 +16,10 @@
                             </div>
                         </div>
                     </div> -->
-                      <div class="form-group row">
+                    <div class="form-group row">
                         <label class="label col-sm-3 col-form-label">Time Stamp adjustments : </label>
                         <div class="col-sm-3">
-                            <input type="text" nbInput fullWidth formControlName="timezone" placeholder="timezone">
-                            <div class="form-error"
-                                *ngIf="( b.timezone.dirty || b.timezone.touched ) && b.timezone.invalid && b.timezone.errors">
-                                timezone is Required
-                            </div>
+                            <mat-slide-toggle></mat-slide-toggle>
                         </div>
                     </div>
                     <div class="box-break">
@@ -54,31 +50,31 @@
                     </div>
 
                     <div class="box-break">
-                            <label class="box-break-label col-sm-3 col-form-label">Break 2 :</label>
-    
-                            <div class="form-group row">
-                                <label class="label col-sm-3 col-form-label">After</label>
-                                <div class="col-sm-3">
-                                    <input type="time" nbInput fullWidth formControlName="breakTwoAfter"
-                                        placeholder="Break After">
-                                    <div class="form-error"
-                                        *ngIf="( b.breakTwoAfter.dirty || b.breakTwoAfter.touched ) && b.breakTwoAfter.invalid && b.breakTwoAfter.errors">
-                                        Break After is Required
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="label col-sm-3 col-form-label">Length</label>
-                                <div class="col-sm-3">
-                                    <input type="time" nbInput fullWidth formControlName="breakTwoLength"
-                                        placeholder="Break Time">
-                                    <div class="form-error"
-                                        *ngIf="( b.breakTwoLength.dirty || b.breakTwoLength.touched ) && b.breakTwoLength.invalid && b.breakTwoLength.errors">
-                                        Break Time is Required
-                                    </div>
+                        <label class="box-break-label col-sm-3 col-form-label">Break 2 :</label>
+
+                        <div class="form-group row">
+                            <label class="label col-sm-3 col-form-label">After</label>
+                            <div class="col-sm-3">
+                                <input type="time" nbInput fullWidth formControlName="breakTwoAfter"
+                                    placeholder="Break After">
+                                <div class="form-error"
+                                    *ngIf="( b.breakTwoAfter.dirty || b.breakTwoAfter.touched ) && b.breakTwoAfter.invalid && b.breakTwoAfter.errors">
+                                    Break After is Required
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="label col-sm-3 col-form-label">Length</label>
+                            <div class="col-sm-3">
+                                <input type="time" nbInput fullWidth formControlName="breakTwoLength"
+                                    placeholder="Break Time">
+                                <div class="form-error"
+                                    *ngIf="( b.breakTwoLength.dirty || b.breakTwoLength.touched ) && b.breakTwoLength.invalid && b.breakTwoLength.errors">
+                                    Break Time is Required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <div class="offset-sm-3 col-sm-9">
                             <button type="submit" nbButton status="primary">Save Settings</button>

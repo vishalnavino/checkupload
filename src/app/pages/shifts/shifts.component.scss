@@ -37,4 +37,6 @@ nb-checkbox {
     margin: 10px;
   }
 
- 
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #ff4081;
+}
