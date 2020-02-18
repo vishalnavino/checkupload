@@ -12,15 +12,20 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.settingForm =  this.fb.group({
-      timezone: [null , Validators.required],
-      breakAfter: [null , Validators.required],
-      breakTime: [null , Validators.required]
+      timezone: [null],
+      breakOneAfter:  ['00:00' , Validators.required],
+      breakOneLength: ['00:00' , Validators.required],
+      breakTwoAfter:  ['00:00' , Validators.required],
+      breakTwoLength: ['00:00' , Validators.required],
     })
   }
 
   // change setting 
   setSetting(){
-   
+   if(this.settingForm.invalid){
+     return
+   }
+  //  Than Send a data 
   }
 
 

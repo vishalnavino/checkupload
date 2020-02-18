@@ -1,20 +1,28 @@
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
-  // {
-  //   title: 'E-commerce',
-  //   icon: 'shopping-cart-outline',
-  //   link: '/pages/dashboard',
-  //   home: true,
-  // },
   {
-    title: 'Overview',
+    title: 'Stats',
+    icon: 'lock-outline',
+    link: '/pages/stats',
+  },
+  {
+    title: 'Employees',
     icon: 'people-outline',
     link: '/pages/employee',
-    home: true,
   },
   {
     title: 'Shifts',
+    icon: 'home-outline',
+    link: '/pages/shifts',
+  },
+  {
+    title: 'Holidays',
+    icon: 'home-outline',
+    link: '/pages/shifts',
+  },
+  {
+    title: 'Sick Notes',
     icon: 'home-outline',
     link: '/pages/shifts',
   },
@@ -23,11 +31,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'lock-outline',
     link: '/pages/settings',
   },
-  {
-    title: 'Stats',
-    icon: 'lock-outline',
-    link: '/pages/stats',
-  },
+
   // {
   //   title: 'FEATURES',
   //   group: true,

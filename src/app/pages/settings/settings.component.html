@@ -6,7 +6,7 @@
 
 
                 <form [formGroup]="settingForm" (ngSubmit)="setSetting()">
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label class="label col-sm-3 col-form-label">Time Zone</label>
                         <div class="col-sm-9">
                             <input type="text" nbInput fullWidth formControlName="timezone" placeholder="timezone">
@@ -15,28 +15,70 @@
                                 timezone is Required
                             </div>
                         </div>
+                    </div> -->
+                      <div class="form-group row">
+                        <label class="label col-sm-3 col-form-label">Time Stamp adjustments : </label>
+                        <div class="col-sm-3">
+                            <input type="text" nbInput fullWidth formControlName="timezone" placeholder="timezone">
+                            <div class="form-error"
+                                *ngIf="( b.timezone.dirty || b.timezone.touched ) && b.timezone.invalid && b.timezone.errors">
+                                timezone is Required
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group row">
-                            <label class="label col-sm-3 col-form-label">Break After</label>
-                            <div class="col-sm-9">
-                                <input type="text" nbInput fullWidth formControlName="breakAfter" placeholder="Break After">
+                    <div class="box-break">
+                        <label class="box-break-label col-sm-3 col-form-label">Break 1 : </label>
+
+                        <div class="form-group row">
+                            <label class="label col-sm-3 col-form-label">After</label>
+                            <div class="col-sm-3">
+                                <input type="time" nbInput fullWidth formControlName="breakOneAfter"
+                                    placeholder="Break After">
                                 <div class="form-error"
-                                    *ngIf="( b.breakAfter.dirty || b.breakAfter.touched ) && b.breakAfter.invalid && b.breakAfter.errors">
+                                    *ngIf="( b.breakOneAfter.dirty || b.breakOneAfter.touched ) && b.breakOneAfter.invalid && b.breakOneAfter.errors">
                                     Break After is Required
                                 </div>
                             </div>
-                    </div>
-                    <div class="form-group row">
-                            <label class="label col-sm-3 col-form-label">Break Time</label>
-                            <div class="col-sm-9">
-                                <input type="text" nbInput fullWidth formControlName="breakTime" placeholder="Break Time">
+                        </div>
+                        <div class="form-group row">
+                            <label class="label col-sm-3 col-form-label">Length</label>
+                            <div class="col-sm-3">
+                                <input type="time" nbInput fullWidth formControlName="breakOneLength"
+                                    placeholder="Break Time">
                                 <div class="form-error"
-                                    *ngIf="( b.breakTime.dirty || b.breakTime.touched ) && b.breakTime.invalid && b.breakTime.errors">
+                                    *ngIf="( b.breakOneLength.dirty || b.breakOneLength.touched ) && b.breakOneLength.invalid && b.breakOneLength.errors">
                                     Break Time is Required
                                 </div>
                             </div>
+                        </div>
                     </div>
 
+                    <div class="box-break">
+                            <label class="box-break-label col-sm-3 col-form-label">Break 2 :</label>
+    
+                            <div class="form-group row">
+                                <label class="label col-sm-3 col-form-label">After</label>
+                                <div class="col-sm-3">
+                                    <input type="time" nbInput fullWidth formControlName="breakTwoAfter"
+                                        placeholder="Break After">
+                                    <div class="form-error"
+                                        *ngIf="( b.breakTwoAfter.dirty || b.breakTwoAfter.touched ) && b.breakTwoAfter.invalid && b.breakTwoAfter.errors">
+                                        Break After is Required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="label col-sm-3 col-form-label">Length</label>
+                                <div class="col-sm-3">
+                                    <input type="time" nbInput fullWidth formControlName="breakTwoLength"
+                                        placeholder="Break Time">
+                                    <div class="form-error"
+                                        *ngIf="( b.breakTwoLength.dirty || b.breakTwoLength.touched ) && b.breakTwoLength.invalid && b.breakTwoLength.errors">
+                                        Break Time is Required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="form-group row">
                         <div class="offset-sm-3 col-sm-9">
                             <button type="submit" nbButton status="primary">Save Settings</button>
