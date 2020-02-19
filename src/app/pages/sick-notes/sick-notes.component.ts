@@ -86,28 +86,32 @@ export class SickNotesComponent implements OnInit {
     this.sickNotesForm = this.fb.group({
       fromDate: [null],
       toDate: [null],
-      types: [null],
+      types: ['s'],
       employee: [null]
     })
-    const data = {
-      "from_time_start": "1990-01-01T00:00:00",
-      "to_time_end": new Date().toISOString().split('.')[0],
-      "types": "h",
-      "emp_ids": "2",
-      "to_time_start": "1990-01-01T00:00:00",
-      "from_time_end": new Date().toISOString().split('.')[0],
-      "manual_time_end": "23:59:59",
-      "manual_time_start": "01:00:00",
-    }
 
-    let params = new URLSearchParams();
-    for (let key in data) {
-      if (data[key] != null) {
-        params.set(key, data[key])
+    this.sickNotesForm.controls.fromDate.setValue(new Date(631152000 * 1000))
+    this.sickNotesForm.controls.toDate.setValue(new Date())
 
-      }
-    }
-    this.loadData(params.toString())
+    // const data = {
+    //   "from_time_start": "1990-01-01T00:00:00",
+    //   "to_time_end": new Date().toISOString().split('.')[0],
+    //   "types": "s",
+    //   "emp_ids": "2",
+    //   "to_time_start": "1990-01-01T00:00:00",
+    //   "from_time_end": new Date().toISOString().split('.')[0],
+    //   "manual_time_end": "23:59:59",
+    //   "manual_time_start": "01:00:00",
+    // }
+
+    // let params = new URLSearchParams();
+    // for (let key in data) {
+    //   if (data[key] != null) {
+    //     params.set(key, data[key])
+
+    //   }
+    // }
+    // this.loadData(params.toString())
   }
 
 
@@ -147,6 +151,8 @@ export class SickNotesComponent implements OnInit {
     if (this.sickNotesForm.value['employee'] != null) {
       data['emp_ids'] = this.sickNotesForm.value['employee'].join(";")
     }
+    // beacause sick-notes find
+    data['types'] = 's';  
 
     let params = new URLSearchParams();
     for (let key in data) {

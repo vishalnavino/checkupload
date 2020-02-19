@@ -88,6 +88,9 @@ export class HolidaysComponent implements OnInit {
       types: [null],
       employee: [null]
     })
+
+    this.shiftForm.controls.fromDate.setValue(new Date(631152000 * 1000))
+    this.shiftForm.controls.toDate.setValue(new Date())
     const data = {
       "from_time_start": "1990-01-01T00:00:00",
       "to_time_end": new Date().toISOString().split('.')[0],

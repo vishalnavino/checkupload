@@ -31,7 +31,7 @@ export class EditSickNotesComponent implements OnInit {
     this.initialzeholidaysForm();
     this.route.params.subscribe(params => {
       this.shiftID = params.id
-      this.shift.id = params.id
+      // this.shift.id = params.id
       this.getShift(params.id);
     });
   }
