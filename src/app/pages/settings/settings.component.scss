@@ -7,3 +7,15 @@ textarea{
 .box-break-label{
     padding: 0;
 }
+.lable{
+    position: relative;
+    display: inline-flex;
+}
+.start-lable{
+    color: #192038;
+    font-family: Open Sans, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    padding: 10px;
+    margin-top: -4px;}

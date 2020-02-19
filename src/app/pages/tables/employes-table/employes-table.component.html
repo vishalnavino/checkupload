@@ -13,7 +13,9 @@
   </nb-card-body>
 
   <nb-card-footer>
+
     <div class="add-button">
+      <a *ngIf="employes.length > 0" class="ng2-smart-action ng2-smart-action-csv" (click)="downloadCSV()">Export CSV</a>
       <a routerLink="add" class="ng2-smart-action ng2-smart-action-add-add"><i class="nb-plus"></i></a>
     </div>
   </nb-card-footer>

@@ -56,6 +56,12 @@
                     (deleteConfirm)="openDeleteDialog($event)" >
                 </ng2-smart-table>
             </nb-card-body>
+            <nb-card-footer>
+
+                <div class="add-button">
+                  <a *ngIf="timeSheets.length > 0" class="ng2-smart-action ng2-smart-action-csv" (click)="downloadCSV()">Export CSV</a>
+                </div>
+              </nb-card-footer>
         </nb-card>
     </div>
 </div>

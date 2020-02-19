@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbCardModule, NbTabsetModule, NbRouteTabsetModule, NbListModule, NbButtonModule, NbInputModule, NbDatepickerModule, NbSelectModule } from '@nebular/theme';
+import { NbMenuModule, NbCardModule, NbTabsetModule, NbRouteTabsetModule, NbListModule, NbButtonModule, NbInputModule, NbDatepickerModule, NbSelectModule, NbToggleModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -54,6 +54,7 @@ import { EditSickNotesComponent } from './sick-notes/edit-sick-notes/edit-sick-n
     NgxEchartsModule,
     NgxChartsModule,
     ChartModule,
+    NbToggleModule
   ],
   declarations: [
     PagesComponent,

@@ -5,6 +5,7 @@ import { Employee } from '../../../@core/interfaces/employe';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { SnackbarService } from '../../../services/snake-bar.service';
+import { ExportCsvService } from '../../../services/export-csv.service';
 
 @Component({
   selector: 'ngx-employes-table',
@@ -64,9 +65,11 @@ export class EmployesTableComponent implements OnInit {
   public employes: Employee[];
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private employesService: EmployesService, private snakebar: SnackbarService,
+  constructor(private employesService: EmployesService, 
+    private snakebar: SnackbarService,
     private dialog: MatDialog,
-    private router: Router) {
+    private router: Router,
+    private csvExportService: ExportCsvService) {
     this.employes = [];
   }
 
@@ -79,7 +82,10 @@ export class EmployesTableComponent implements OnInit {
       });
   }
 
-
+  // export csv File
+  downloadCSV() {
+    this.csvExportService.downloadFileEmployee(this.employes, 'Employees');
+  }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
