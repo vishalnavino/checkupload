@@ -39,10 +39,7 @@
                     </div>
                  </form>
                  <ng2-smart-table [settings]="settings" [source]="source"
-                 (createConfirm)="onCreateConfirm($event)" 
-                 (editConfirm)="onEditConfirm($event)"
-                 (userRowSelect)="onUserRowSelect($event)" 
-                 (deleteConfirm)="openDeleteDialog($event)" >
+                 (userRowSelect)="onUserRowSelect($event)">
                  </ng2-smart-table>
               </nb-card-body>
               <nb-card-footer *ngIf="timeSheets.length > 0">
